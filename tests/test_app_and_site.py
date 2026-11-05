@@ -50,6 +50,9 @@ def test_site_builds(tmp_path, monkeypatch):
     for page in (tmp_path / "_site").glob("*.html"):
         footer = page.read_text().split("<footer>", 1)[-1]
         assert DISCLAIMER in footer, f"disclaimer missing from footer of {page.name}"
+        assert f'href="{build.APP_HREF}"' in footer, f"dashboard link missing from {page.name}"
+    index = (tmp_path / "_site" / "index.html").read_text()
+    assert f'href="{build.APP_HREF}"' in index.split("<footer>", 1)[0], "hero dashboard link"
     assert (tmp_path / "_site" / "dbt-docs" / "index.html").exists()
     for page in ("gap-report.html", "findings.html", "limitations.html", "sop.html"):
         assert (tmp_path / "_site" / page).exists(), page
