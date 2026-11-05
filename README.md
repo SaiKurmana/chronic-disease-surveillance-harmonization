@@ -101,8 +101,11 @@ comparisons; see [limitations](docs/limitations.md)._
 - **Overlapping systems mostly agree, except for one year.** CDI and USDSS publish the
   same BRFSS diabetes indicator: 88.8% of matched crude cells are within 0.5 percentage
   points. In **2020**, 36.2% of cells differ by more than 0.5 pp, compared with 2.7–4.0% in
-  other years. VEHSS and BRFSS Prevalence publish the same vision question and agree to
-  within 0.5 pp in 99.5% of cells.
+  other years. The cause is not determined from these data. CDC's BRFSS 2020
+  comparability notes document disrupted 2020 data collection, which is possible context
+  only ([limitations](docs/limitations.md#overlapping-sources-do-not-always-agree)).
+  VEHSS and BRFSS Prevalence publish the same vision question and agree to within 0.5 pp
+  in 99.5% of cells.
 - **State rankings move together.** Spearman ρ across 50 states + DC: diabetes ×
   self-reported kidney disease 0.71, diabetes × vision difficulty 0.69, diabetes ×
   treated ESKD incidence 0.70.
@@ -117,9 +120,24 @@ comparisons; see [limitations](docs/limitations.md)._
 
 ## Screenshots
 
-| Overview | Dashboard | Gap report |
-|---|---|---|
-| _placeholder: `docs/img/site-overview.png`_ | _placeholder: `docs/img/app-explore.png`_ | _placeholder: `docs/img/gap-report.png`_ |
+Captured from the local build (`make app`, `make site`) on the 2026-11-05 snapshot.
+
+**Dashboard: explore an indicator.** State map, published 95% CIs by stratum, and a
+provenance panel under every view.
+
+![Streamlit dashboard: diagnosed diabetes by state with stratified bars and confidence intervals](docs/img/app-explore.webp)
+
+**Dashboard: data-quality tab.** Results of the last `dbt build`, filterable by status.
+
+![Streamlit data-quality tab listing dbt test results](docs/img/app-data-quality.webp)
+
+**Gap report: schema comparison matrix.** How each source encodes the same concepts.
+
+![Gap report page showing the schema comparison matrix across the four sources](docs/img/gap-report.webp)
+
+**Site landing page.**
+
+![Static site landing page with project summary and key metrics](docs/img/site-overview.webp)
 
 ## Repository layout
 

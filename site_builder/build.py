@@ -139,7 +139,7 @@ def rewrite_links(text: str, src_rel: str) -> str:
 
 def md_to_html(text: str, src_rel: str) -> str:
     out = markdown.markdown(
-        text, extensions=["tables", "fenced_code", "toc", "sane_lists"],
+        text, extensions=["tables", "fenced_code", "toc", "sane_lists", "footnotes"],
         extension_configs={"toc": {"permalink": False}},
     )
     out = re.sub(
@@ -268,7 +268,8 @@ def index_page() -> None:
       <div class="note">across 50 states + DC</div></div>
     <div class="card tile"><div class="label">CDI vs USDSS diabetes cells differing &gt; 0.5 pp in 2020</div>
       <div class="value">{y2020['% differing > 0.5 pp']}%</div>
-      <div class="note">vs {dm['% within 0.5 pp']}% within 0.5 pp overall</div></div>
+      <div class="note">vs {dm['% within 0.5 pp']}% within 0.5 pp overall. Cause not
+      determined from these data; <a href="limitations.html#overlapping-sources-do-not-always-agree">see limitations</a>.</div></div>
   </div>
   <div class="grid" style="margin-top:16px">
     {chart('pilot_maps', f"Pilot indicators by state, {pil['pilot_year']}",
