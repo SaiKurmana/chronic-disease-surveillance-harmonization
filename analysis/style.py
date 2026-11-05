@@ -31,6 +31,14 @@ THEMES = {
 }
 FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
 
+SHORT_NAME = {
+    "DIAB_DX_PREV": "Diabetes",
+    "DIAB_NEW_INC": "New diabetes",
+    "VIS_DIFF_SEE": "Vision difficulty",
+    "CKD_SELF_REPORT": "Kidney disease (self-report)",
+    "ESKD_INCIDENCE": "ESKD incidence",
+}
+
 UNIT_LABEL = {"percent": "%", "per_1000": "per 1,000", "per_1000000": "per 1,000,000"}
 
 
@@ -40,11 +48,11 @@ def apply_theme(fig: go.Figure, mode: str = "light") -> go.Figure:
         paper_bgcolor=t["surface"],
         plot_bgcolor=t["surface"],
         font=dict(family=FONT, color=t["ink2"], size=13),
-        title_font=dict(color=t["ink"], size=15),
         legend=dict(font=dict(color=t["ink2"])),
         hoverlabel=dict(font=dict(family=FONT)),
-        margin=dict(l=48, r=16, t=48, b=40),
     )
+    if fig.layout.title.text:  # styling an absent title makes some renderers print "undefined"
+        fig.update_layout(title_font=dict(color=t["ink"], size=15))
     fig.update_xaxes(gridcolor=t["grid"], linecolor=t["axis"], zerolinecolor=t["axis"],
                      tickfont=dict(color=t["muted"]), title_font=dict(color=t["ink2"]))
     fig.update_yaxes(gridcolor=t["grid"], linecolor=t["axis"], zerolinecolor=t["axis"],
@@ -100,6 +108,8 @@ def cooccurrence_heatmap(profile: pd.DataFrame) -> go.Figure:
              .agg(n=("n_top_tertile_conditions", "first"), s=("tertile", "sum"))
              .sort_values(["n", "s"], ascending=[False, True]).index.tolist())
     inds = p[["indicator_id", "indicator_name"]].drop_duplicates().sort_values("indicator_id")
+    xlabels = [SHORT_NAME.get(i, n) for i, n in zip(inds.indicator_id, inds.indicator_name,
+                                                      strict=True)]
     z = (p.pivot(index="geo_abbr", columns="indicator_id", values="tertile")
          .reindex(index=order, columns=inds.indicator_id))
     est = (p.pivot(index="geo_abbr", columns="indicator_id", values="estimate")
@@ -109,14 +119,19 @@ def cooccurrence_heatmap(profile: pd.DataFrame) -> go.Figure:
     scale = [[0, TERTILE_COLORS[1]], [0.33, TERTILE_COLORS[1]], [0.34, TERTILE_COLORS[2]],
              [0.66, TERTILE_COLORS[2]], [0.67, TERTILE_COLORS[3]], [1, TERTILE_COLORS[3]]]
     fig = go.Figure(go.Heatmap(
-        z=z.values, x=inds.indicator_name.tolist(), y=order, zmin=1, zmax=3,
+        z=z.values, x=xlabels, y=order, zmin=1, zmax=3,
         colorscale=scale, xgap=2, ygap=2, showscale=False,
         customdata=est.values, text=text.values,
         hovertemplate="<b>%{y}</b> · %{x}<br>%{text} (%{customdata:.1f})<extra></extra>",
     ))
+    for k, name in labels.items():  # legend swatches (identity is never color-alone)
+        fig.add_trace(go.Scatter(x=[None], y=[None], mode="markers", name=name,
+                                 marker=dict(size=12, symbol="square", color=TERTILE_COLORS[k])))
     fig.update_yaxes(autorange="reversed", tickfont=dict(size=10), showgrid=False)
-    fig.update_xaxes(side="top", showgrid=False)
-    fig.update_layout(height=max(420, 16 * len(order) + 80))
+    fig.update_xaxes(side="top", showgrid=False, tickangle=0)
+    fig.update_layout(height=max(420, 16 * len(order) + 110), plot_bgcolor="rgba(0,0,0,0)",
+                      legend=dict(orientation="h", y=-0.02, yanchor="top", x=0),
+                      margin=dict(l=40, r=8, t=40, b=40))
     return fig
 
 
@@ -146,7 +161,7 @@ def overlap_scatter(pairs: pd.DataFrame, title_a: str, title_b: str,
     for name, d, c in groups:
         if d.empty:
             continue
-        fig.add_trace(go.Scattergl(
+        fig.add_trace(go.Scatter(
             x=d.ea, y=d.eb, mode="markers", name=name,
             marker=dict(size=6, color=c, opacity=0.65),
             hovertemplate=title_a + ": %{x:.2f}<br>" + title_b + ": %{y:.2f}<extra>"
