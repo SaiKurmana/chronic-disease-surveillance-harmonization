@@ -1,0 +1,7 @@
+source_key,data_source_raw,data_source,data_source_name,method_note
+usdss_state,Behavioral Risk Factors Surveillance System (BRFSS) <=2010,BRFSS,Behavioral Risk Factor Surveillance System,Pre-2011 BRFSS methodology (landline only; post-stratification weighting)
+usdss_state,Behavioral Risk Factors Surveillance System (BRFSS) >=2011,BRFSS,Behavioral Risk Factor Surveillance System,2011+ BRFSS methodology (landline + cell; raking) - not comparable to <=2010
+vehss_brfss,BRFSS,BRFSS,Behavioral Risk Factor Surveillance System,
+brfss_prevalence,BRFSS,BRFSS,Behavioral Risk Factor Surveillance System,
+cdi,BRFSS,BRFSS,Behavioral Risk Factor Surveillance System,
+cdi,USRDS,USRDS,United States Renal Data System,Registry of treated ESKD (administrative/registry; not a survey)

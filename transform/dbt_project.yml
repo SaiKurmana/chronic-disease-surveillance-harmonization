@@ -1,0 +1,46 @@
+name: cdsh
+version: "1.0.0"
+config-version: 2
+profile: cdsh
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Root of the raw zone. Defaults to the committed offline snapshot.
+  data_dir: "{{ env_var('CDSH_DATA_DIR', '../data/sample') }}"
+
+models:
+  cdsh:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+
+seeds:
+  cdsh:
+    +schema: seeds
+    seed_geography:
+      +column_types:
+        geo_fips: varchar
+        state_abbr: varchar
+    seed_indicator_crosswalk:
+      +column_types:
+        include: boolean
+    seed_stratification_catalog:
+      +column_types:
+        age_min: integer
+        age_max: integer
+        sort_order: integer
+
+flags:
+  send_anonymous_usage_stats: false

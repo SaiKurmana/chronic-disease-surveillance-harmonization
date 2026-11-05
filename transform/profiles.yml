@@ -1,0 +1,7 @@
+cdsh:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('CDSH_DUCKDB_PATH', '../data/warehouse.duckdb') }}"
+      threads: 4

@@ -1,0 +1,85 @@
+name: Weekly data refresh
+
+# Pulls the latest public data from data.cdc.gov, rebuilds and tests the
+# harmonized model, regenerates reports, and proposes the result as a pull
+# request. Nothing is pushed to main directly.
+#
+# Optional repository secret SOCRATA_APP_TOKEN raises Socrata rate limits.
+# Note: PRs opened with the default GITHUB_TOKEN do not trigger other
+# workflows; the dbt tests below are the gate, and CI can be re-run manually.
+on:
+  schedule:
+    - cron: "17 9 * * 1"   # Mondays 09:17 UTC
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-pull even if upstream datasets are unchanged"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install
+        run: make setup PYTHON=python
+
+      - name: Verify sources are reachable
+        run: .venv/bin/python -m ingest.verify_sources
+
+      - name: Ingest (live pull -> data/raw -> data/sample)
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then
+            .venv/bin/python -m ingest --force
+          else
+            .venv/bin/python -m ingest
+          fi
+          .venv/bin/python -m ingest.snapshot
+
+      - name: Transform, test, analyse, document
+        run: make site
+
+      - name: pytest
+        run: make pytest
+
+      - name: Open pull request with refreshed data
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data-refresh/weekly
+          delete-branch: true
+          commit-message: "Refresh public data snapshot and regenerated reports"
+          title: "Weekly data refresh"
+          body: |
+            Automated refresh from data.cdc.gov.
+
+            - Raw snapshot: `data/sample/_manifest.json` (dataset ids, upstream `rowsUpdatedAt`, pull time)
+            - Marts and dbt test results: `data/mart/`
+            - Regenerated reports: `analysis/output/`, `docs/harmonization_report.md`, `docs/data_dictionary.md`
+
+            dbt build and pytest passed in the workflow before this PR was opened.
+            Review the overlap section of `analysis/output/gap_report.md` for changes.
+          add-paths: |
+            data/sample
+            data/mart
+            analysis/output
+            docs/harmonization_report.md
+            docs/data_dictionary.md

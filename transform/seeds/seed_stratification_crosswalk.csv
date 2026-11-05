@@ -1,0 +1,76 @@
+source_key,raw_strat_category,raw_strat_value,strat_category,strat_value
+usdss_state,Overall,Overall,overall,overall
+usdss_state,Sex,Male,sex,male
+usdss_state,Sex,Female,sex,female
+usdss_state,Age,18-44,age_group,18-44
+usdss_state,Age,45-64,age_group,45-64
+usdss_state,Age,65-74,age_group,65-74
+usdss_state,Age,75+,age_group,75+
+usdss_state,Age,65+,age_group,65+
+usdss_state,Race,Hispanic,race_ethnicity,hispanic
+usdss_state,Race,Non-Hispanic White,race_ethnicity,nh_white
+usdss_state,Race,Non-Hispanic Black,race_ethnicity,nh_black
+usdss_state,Race,Non-Hispanic Asian or Pacific Islander,race_ethnicity,nh_asian_pi
+usdss_state,Education,< High School,education,lt_hs
+usdss_state,Education,High School,education,hs_ged
+usdss_state,Education,> High School,education,gt_hs
+vehss_brfss,Overall,Overall,overall,overall
+vehss_brfss,Sex,Male,sex,male
+vehss_brfss,Sex,Female,sex,female
+vehss_brfss,Age,18-39 years,age_group,18-39
+vehss_brfss,Age,40-64 years,age_group,40-64
+vehss_brfss,Age,65 years and older,age_group,65+
+vehss_brfss,RaceEthnicity,"Hispanic, any race",race_ethnicity,hispanic
+vehss_brfss,RaceEthnicity,"White, non-Hispanic",race_ethnicity,nh_white
+vehss_brfss,RaceEthnicity,"Black, non-Hispanic",race_ethnicity,nh_black
+vehss_brfss,RaceEthnicity,Asian,race_ethnicity,asian
+vehss_brfss,RaceEthnicity,North American Native,race_ethnicity,aian
+vehss_brfss,RaceEthnicity,Other,race_ethnicity,other
+vehss_brfss,RiskFactor: Diabetes,Yes,diabetes_status,yes
+vehss_brfss,RiskFactor: Diabetes,No,diabetes_status,no
+vehss_brfss,RiskFactor: Hypertension,Yes,hypertension_status,yes
+vehss_brfss,RiskFactor: Hypertension,No,hypertension_status,no
+vehss_brfss,RiskFactor: Smoking,Yes,smoking_status,yes
+vehss_brfss,RiskFactor: Smoking,No,smoking_status,no
+brfss_prevalence,Overall,Overall,overall,overall
+brfss_prevalence,Sex,Male,sex,male
+brfss_prevalence,Sex,Female,sex,female
+brfss_prevalence,Age Group,18-24,age_group,18-24
+brfss_prevalence,Age Group,25-34,age_group,25-34
+brfss_prevalence,Age Group,35-44,age_group,35-44
+brfss_prevalence,Age Group,45-54,age_group,45-54
+brfss_prevalence,Age Group,55-64,age_group,55-64
+brfss_prevalence,Age Group,65+,age_group,65+
+brfss_prevalence,Race/Ethnicity,Hispanic,race_ethnicity,hispanic
+brfss_prevalence,Race/Ethnicity,"White, non-Hispanic",race_ethnicity,nh_white
+brfss_prevalence,Race/Ethnicity,"Black, non-Hispanic",race_ethnicity,nh_black
+brfss_prevalence,Race/Ethnicity,"Asian, non-Hispanic",race_ethnicity,nh_asian
+brfss_prevalence,Race/Ethnicity,"American Indian or Alaskan Native, non-Hispanic",race_ethnicity,nh_aian
+brfss_prevalence,Race/Ethnicity,"Native Hawaiian or other Pacific Islander, non-Hispanic",race_ethnicity,nh_nhpi
+brfss_prevalence,Race/Ethnicity,"Multiracial, non-Hispanic",race_ethnicity,nh_multiracial
+brfss_prevalence,Race/Ethnicity,"Other, non-Hispanic",race_ethnicity,nh_other
+brfss_prevalence,Education Attained,Less than H.S.,education,lt_hs
+brfss_prevalence,Education Attained,H.S. or G.E.D.,education,hs_ged
+brfss_prevalence,Education Attained,Some post-H.S.,education,some_college
+brfss_prevalence,Education Attained,College graduate,education,college_grad
+brfss_prevalence,Household Income,"Less than $15,000",income,lt_15k
+brfss_prevalence,Household Income,"$15,000-$24,999",income,15k_25k
+brfss_prevalence,Household Income,"$25,000-$34,999",income,25k_35k
+brfss_prevalence,Household Income,"$35,000-$49,999",income,35k_50k
+brfss_prevalence,Household Income,"$50,000+",income,50k_plus
+brfss_prevalence,Household Income,"$50,000-$99,999",income,50k_100k
+brfss_prevalence,Household Income,"$100,000-$199,999",income,100k_200k
+brfss_prevalence,Household Income,"$200,000+",income,200k_plus
+cdi,Overall,Overall,overall,overall
+cdi,Sex,Male,sex,male
+cdi,Sex,Female,sex,female
+cdi,Age,Age 18-44,age_group,18-44
+cdi,Age,Age 45-64,age_group,45-64
+cdi,Age,Age >=65,age_group,65+
+cdi,Race/Ethnicity,Hispanic,race_ethnicity,hispanic
+cdi,Race/Ethnicity,"White, non-Hispanic",race_ethnicity,nh_white
+cdi,Race/Ethnicity,"Black, non-Hispanic",race_ethnicity,nh_black
+cdi,Race/Ethnicity,"Asian, non-Hispanic",race_ethnicity,nh_asian
+cdi,Race/Ethnicity,"American Indian or Alaska Native, non-Hispanic",race_ethnicity,nh_aian
+cdi,Race/Ethnicity,"Native Hawaiian or Other Pacific Islander, non-Hispanic",race_ethnicity,nh_nhpi
+cdi,Race/Ethnicity,"Multiracial, non-Hispanic",race_ethnicity,nh_multiracial

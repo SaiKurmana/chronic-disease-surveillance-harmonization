@@ -1,0 +1,78 @@
+version: 2
+models:
+- name: int_usdss__estimates
+  description: USDSS reshaped to the common pre-harmonization shape.
+  columns:
+  - name: n_strat_dims
+    description: Number of non-total stratifiers on the row (0 = overall).
+    data_tests:
+    - value_between:
+        arguments:
+          min_value: 0
+          max_value: 1
+- name: int_vehss__estimates
+  description: VEHSS reshaped; rows with n_strat_dims > 1 are cross-classified cells dropped in the mart.
+- name: int_brfss__estimates
+  description: BRFSS Prevalence reshaped; median-of-states rows removed.
+  columns:
+  - name: n_strat_dims
+    data_tests:
+    - value_between:
+        arguments:
+          min_value: 0
+          max_value: 1
+- name: int_cdi__estimates
+  description: CDI reshaped; only stratification pair 1 is populated for CKD01/DIA01.
+  columns:
+  - name: n_strat_dims
+    data_tests:
+    - value_between:
+        arguments:
+          min_value: 0
+          max_value: 1
+- name: int_estimates__unioned
+  description: All sources stacked in the common shape, still in source vocabularies. Crosswalk completeness
+    is tested here.
+  columns:
+  - name: data_status
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - reported
+          - suppressed
+          - not_available
+  data_tests:
+  - unmapped_crosswalk_values:
+      name: unmapped_indicator_crosswalk
+      arguments:
+        columns:
+        - source_key
+        - source_indicator_code
+        - source_measure
+        crosswalk: ref('seed_indicator_crosswalk')
+  - unmapped_crosswalk_values:
+      name: unmapped_stratification_crosswalk
+      arguments:
+        columns:
+        - source_key
+        - raw_strat_category
+        - raw_strat_value
+        crosswalk: ref('seed_stratification_crosswalk')
+        where: n_strat_dims <= 1
+  - unmapped_crosswalk_values:
+      name: unmapped_geography_crosswalk
+      arguments:
+        columns:
+        - location_abbr
+        crosswalk: ref('seed_geography')
+        crosswalk_columns:
+        - state_abbr
+  - unmapped_crosswalk_values:
+      name: unmapped_data_source_crosswalk
+      arguments:
+        columns:
+        - source_key
+        - data_source_raw
+        crosswalk: ref('seed_data_source_crosswalk')

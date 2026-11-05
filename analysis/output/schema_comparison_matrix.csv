@@ -1,0 +1,15 @@
+Concept,USDSS (b559-sbez),VEHSS BRFSS (vkwg-yswv),BRFSS Prevalence (dttw-5yxu),CDI (hksd-2xuw)
+Indicator identifier,"`indicator` (text label, no code)","`questionid`, `question`","`questionid`, `question` (id changes across years)","`questionid`, `question`"
+Response / numerator definition,— (implicit in indicator),`response`,`response` (one row per answer),`response` (unused for CKD01/DIA01)
+Measure type (crude / age-adjusted),"`age`, `unit` (method mixed into the age column)",`data_value_type`,`data_value_type` (crude only),`datavaluetype`
+Unit,`unit`,`data_value_unit`,`data_value_unit`,`datavalueunit`
+Time,`year`,"`yearstart`, `yearend`",`year`,"`yearstart`, `yearend`"
+Geography,`state` (USPS abbreviation only),"`locationabbr`, `locationdesc`, `locationid`, `geographic_level`","`locationabbr`, `locationdesc`, `locationid`","`locationabbr`, `locationdesc`, `locationid`"
+Stratification layout,"`age`, `race`, `sex`, `education` (one column per stratifier)","`age`, `sex`, `raceethnicity`, `riskfactor`, `riskfactorresponse` (cross-classified cells)","`break_out_category`, `break_out` (one stratifier per row)","`stratificationcategory1`, `stratification1`, `stratificationcategory2`, `stratification2`, `stratificationcategory3`, `stratification3` (up to three pairs)"
+Point estimate,`estimate`,`data_value`,`data_value`,"`datavalue`, `datavaluealt`"
+Confidence interval,"`lowerlimit`, `upperlimit`","`low_confidence_limit`, `high_confidence_limit`","`confidence_limit_low`, `confidence_limit_high`","`lowconfidencelimit`, `highconfidencelimit`"
+Standard error,`seestimate`,— (not published),— (not published),— (not published)
+Sample size / numerator,— (not published),"`sample_size`, `numerator`, `weightedsample`, `nonweightedsample`",`sample_size`,— (not published)
+Suppression flag,`estimatefootnote` (text: Suppressed / No Data),"`data_value_footnote_symbol`, `data_value_footnote` (symbol #)","`data_value_footnote_symbol`, `data_value_footnote` (symbols *, **, ***)","`datavaluefootnotesymbol`, `datavaluefootnote` (symbols *, ****)"
+Underlying data source,`datasource` (encodes BRFSS method break <=2010 / >=2011),`datasource`,`datasource`,`datasource` (BRFSS or USRDS)
+Published columns (excl. provenance),17,39,27,34
