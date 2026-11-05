@@ -198,7 +198,7 @@
       "Rows": 38489,
       "% suppressed": 28.3,
       "% not available": 4.2,
-      "Footnotes used for non-reported cells": "*** No responses for this data cell. \u2016 ** No responses for this data cell \u2016 * Prevalence estimate not available if the unweighted sample size for the denominator was < 50 or the Relative Standard Error (RSE) is > 0.3 or if the state did not collect data for that calendar year. \u2016 *** No responses for this data cell"
+      "Footnotes used for non-reported cells": "* Prevalence estimate not available if the unweighted sample size for the denominator was < 50 or the Relative Standard Error (RSE) is > 0.3 or if the state did not collect data for that calendar year. \u2016 ** No responses for this data cell \u2016 *** No responses for this data cell \u2016 *** No responses for this data cell."
     },
     {
       "Source": "cdi",

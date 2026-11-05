@@ -42,7 +42,7 @@ def export_tables(con: duckdb.DuckDBPyConnection) -> dict[str, int]:
             " order by source_key, indicator_id, measure_type, geo_fips, year, strat_category,"
             " strat_value"
             if name == "fct_indicator_estimates"
-            else ""
+            else " order by all"
         )
         con.execute(
             f"copy (select * from {t}{order}) to '{out}' (format parquet, compression zstd)"

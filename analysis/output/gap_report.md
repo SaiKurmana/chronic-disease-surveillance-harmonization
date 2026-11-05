@@ -94,7 +94,7 @@ Published numeric precision (raw strings):
 
 | Source | Rows | % suppressed | % not available | Footnotes used for non-reported cells |
 |---|---|---|---|---|
-| brfss_prevalence | 38,489 | 28.3 | 4.2 | *** No responses for this data cell. ‖ ** No responses for this data cell ‖ * Prevalence estimate not available if the unweighted sample size for the denominator was < 50 or the Relative Standard Error (RSE) is > 0.3 or if the state did not collect data for that calendar year. ‖ *** No responses for this data cell |
+| brfss_prevalence | 38,489 | 28.3 | 4.2 | * Prevalence estimate not available if the unweighted sample size for the denominator was < 50 or the Relative Standard Error (RSE) is > 0.3 or if the state did not collect data for that calendar year. ‖ ** No responses for this data cell ‖ *** No responses for this data cell ‖ *** No responses for this data cell. |
 | cdi | 6,533 | 26 | 2.6 | * No data available ‖ **** Data suppressed; denominator < 50 or relative standard error > 30% |
 | usdss_state | 63,450 | 9.7 | 6.9 | No Data ‖ Suppressed |
 | vehss_brfss | 17,033 | 22.2 | 0 | # Value suppressed |
