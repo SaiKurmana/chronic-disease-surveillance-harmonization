@@ -48,9 +48,19 @@ analysis can plug into. The adapters live in reviewed CSV files, not inside code
 The diabetes disagreement is concentrated in **2020**: 36.2% of
 matched cells differ by more than 0.5 pp (mean absolute difference
 0.68 pp), compared with 2.7–4.0% in
-other years. The datasets do not document a reason. **Two systems that look
-interchangeable can still diverge for a single year**, which is why the model
-keeps both and marks a primary source instead of averaging them.
+other years. **The cause is not determined from these data**; neither dataset
+documents why its 2020 values differ from the other's. As possible context only,
+CDC's *Comparability of Data, BRFSS 2020* documents that 2020 data collection was
+disrupted (collection "was interrupted in some areas for a short time", many
+states did not collect all 12 monthly samples, and 32 states, DC and Puerto Rico
+continued collection into early 2021).[^brfss2020] That document describes the
+survey, not how USDSS or CDI processed 2020 data, so it does not explain the
+difference between them. The practical lesson for harmonization is descriptive:
+two systems that look interchangeable can still diverge for a single year.
+That is why the model keeps both and marks a primary source instead of averaging
+them.
+
+[^brfss2020]: Centers for Disease Control and Prevention. *Behavioral Risk Factor Surveillance System: Comparability of Data, BRFSS 2020.* August 2021, section A. <https://www.cdc.gov/brfss/annual_data/2020/pdf/compare-2020-508.pdf>
 
 The two sources also disagree on suppression for 20 crude
 diabetes cells and 122 vision cells: one system marks the
@@ -122,8 +132,8 @@ causation. See [limitations](limitations.md).
 7. **Stable indicator ids across question revisions**, with a version field
    (for example `CKD_SELF_REPORT` v2019) instead of a new id.
 8. **Document cross-system reconciliation.** When two systems publish the same
-   BRFSS indicator, say which is authoritative and why they may differ
-   (for example 2020).
+   BRFSS indicator, say which is authoritative and document any processing
+   differences, so users do not have to infer them (as with 2020 here).
 9. **Version and timestamp releases.** Socrata `rowsUpdatedAt` is the only version
    signal today. A release tag would make refreshes auditable.
 10. **Fill the kidney gap.** A state-level CKD prevalence indicator based on
