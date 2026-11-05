@@ -1,0 +1,54 @@
+version: 2
+models:
+- name: stg_usdss__state_indicators
+  description: USDSS state burden indicators (b559-sbez), renamed and typed. `age` mixes age bands with
+    the standardization method (Crude / Age-Adjusted).
+  columns:
+  - name: location_abbr
+    data_tests:
+    - not_null
+  - name: year
+    data_tests:
+    - not_null
+  - name: unit
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - Percentage
+          - Rate per 1,000
+- name: stg_vehss__brfss
+  description: VEHSS BRFSS summary table (vkwg-yswv), renamed and typed.
+  columns:
+  - name: location_abbr
+    data_tests:
+    - not_null
+  - name: data_value_type
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - Crude Prevalence
+          - Age-adjusted Prevalence
+- name: stg_brfss__prevalence
+  description: BRFSS Prevalence & Trends (dttw-5yxu), kidney and BLIND questions, renamed and typed.
+  columns:
+  - name: location_abbr
+    data_tests:
+    - not_null
+  - name: response
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - 'Yes'
+- name: stg_cdi__indicators
+  description: U.S. Chronic Disease Indicators (hksd-2xuw), CKD01 + DIA01, renamed and typed.
+  columns:
+  - name: question_id
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - CKD01
+          - DIA01

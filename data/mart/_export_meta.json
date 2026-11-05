@@ -1,0 +1,52 @@
+{
+  "exported_at": "2026-11-05T04:31:40+00:00",
+  "row_counts": {
+    "fct_indicator_estimates": 125505,
+    "dim_indicator": 5,
+    "dim_geography": 55,
+    "dim_stratification": 46,
+    "dim_source": 4,
+    "mart_pilot_state_profile": 204,
+    "seed_indicator_crosswalk": 16,
+    "seed_stratification_crosswalk": 75,
+    "seed_data_source_crosswalk": 6
+  },
+  "raw_snapshot": {
+    "brfss_prevalence": {
+      "dataset_id": "dttw-5yxu",
+      "file": "brfss_prevalence/brfss_prevalence__20261105T042358Z.parquet",
+      "filter": "questionid in ('CHCKIDNY','CHCKDNY1','CHCKDNY2','BLIND') AND response = 'Yes'",
+      "filter_hash": "063afbdddcf6",
+      "loaded_at": "2026-11-05T04:23:58+00:00",
+      "rows": 38545,
+      "source_rows_updated_at": 1789482408
+    },
+    "cdi": {
+      "dataset_id": "hksd-2xuw",
+      "file": "cdi/cdi__20261105T042402Z.parquet",
+      "filter": "questionid in ('CKD01','DIA01')",
+      "filter_hash": "290211e43491",
+      "loaded_at": "2026-11-05T04:24:02+00:00",
+      "rows": 6741,
+      "source_rows_updated_at": 1780605223
+    },
+    "usdss_state": {
+      "dataset_id": "b559-sbez",
+      "file": "usdss_state/usdss_state__20261105T042350Z.parquet",
+      "filter": "indicator in ('Diagnosed Diabetes','Newly Diagnosed Diabetes') AND unit in ('Percentage','Rate per 1,000')",
+      "filter_hash": "814df961e79b",
+      "loaded_at": "2026-11-05T04:23:50+00:00",
+      "rows": 63450,
+      "source_rows_updated_at": 1782228990
+    },
+    "vehss_brfss": {
+      "dataset_id": "vkwg-yswv",
+      "file": "vehss_brfss/vehss_brfss__20261105T042353Z.parquet",
+      "filter": null,
+      "filter_hash": "e3b0c44298fc",
+      "loaded_at": "2026-11-05T04:23:53+00:00",
+      "rows": 45483,
+      "source_rows_updated_at": 1772123822
+    }
+  }
+}

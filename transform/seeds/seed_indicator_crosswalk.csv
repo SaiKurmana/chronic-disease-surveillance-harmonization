@@ -1,0 +1,17 @@
+source_key,source_indicator_code,source_measure,indicator_id,measure_type,unit,include,mapping_note
+usdss_state,Diagnosed Diabetes,Percentage | Crude,DIAB_DX_PREV,crude_prevalence,percent,true,
+usdss_state,Diagnosed Diabetes,Percentage | Age-Adjusted,DIAB_DX_PREV,age_adjusted_prevalence,percent,true,
+usdss_state,Diagnosed Diabetes,Percentage | Age-specific,DIAB_DX_PREV,crude_prevalence,percent,true,USDSS stores age bands in the age column; within-band estimates are crude
+usdss_state,Newly Diagnosed Diabetes,"Rate per 1,000 | Crude",DIAB_NEW_INC,crude_rate,per_1000,true,
+usdss_state,Newly Diagnosed Diabetes,"Rate per 1,000 | Age-Adjusted",DIAB_NEW_INC,age_adjusted_rate,per_1000,true,
+usdss_state,Newly Diagnosed Diabetes,"Rate per 1,000 | Age-specific",DIAB_NEW_INC,crude_rate,per_1000,true,
+cdi,DIA01,Crude Prevalence,DIAB_DX_PREV,crude_prevalence,percent,true,Overlap source for USDSS (both BRFSS)
+cdi,DIA01,Age-adjusted Prevalence,DIAB_DX_PREV,age_adjusted_prevalence,percent,true,Overlap source for USDSS (both BRFSS)
+cdi,CKD01,"Adjusted rate by age, sex, race and ethnicity",ESKD_INCIDENCE,adjusted_rate,per_1000000,true,
+cdi,CKD01,Number,ESKD_INCIDENCE,count,count,false,Counts excluded from the rate-based mart
+vehss_brfss,ACSBL,Crude Prevalence,VIS_DIFF_SEE,crude_prevalence,percent,true,
+vehss_brfss,ACSBL,Age-adjusted Prevalence,VIS_DIFF_SEE,age_adjusted_prevalence,percent,true,
+brfss_prevalence,BLIND,Crude Prevalence,VIS_DIFF_SEE,crude_prevalence,percent,true,Overlap source for VEHSS (same BRFSS question)
+brfss_prevalence,CHCKIDNY,Crude Prevalence,CKD_SELF_REPORT,crude_prevalence,percent,true,Question id used 2011-2017
+brfss_prevalence,CHCKDNY1,Crude Prevalence,CKD_SELF_REPORT,crude_prevalence,percent,true,Question id used 2018
+brfss_prevalence,CHCKDNY2,Crude Prevalence,CKD_SELF_REPORT,crude_prevalence,percent,true,Question id used 2019+

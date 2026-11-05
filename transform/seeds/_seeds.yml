@@ -1,0 +1,49 @@
+version: 2
+seeds:
+- name: seed_indicator_crosswalk
+  description: Source indicator + measure -> harmonized indicator_id, measure_type, unit. `include=false`
+    documents rows deliberately excluded (e.g. counts).
+  columns:
+  - name: indicator_id
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('seed_indicator_catalog')
+          field: indicator_id
+- name: seed_indicator_catalog
+  description: Harmonized indicator definitions and the designated primary source for each.
+  columns:
+  - name: indicator_id
+    data_tests:
+    - unique
+    - not_null
+- name: seed_stratification_crosswalk
+  description: Source stratifier category/value -> harmonized strat_category/strat_value (e.g. 'Age >=65'
+    / '65 years and older' / '65+' -> age_group:65+).
+  data_tests:
+  - unique_combination_check:
+      arguments:
+        columns:
+        - source_key
+        - raw_strat_category
+        - raw_strat_value
+  - relationships_composite:
+      arguments:
+        to: ref('seed_stratification_catalog')
+        columns:
+        - strat_category
+        - strat_value
+- name: seed_stratification_catalog
+  description: Harmonized stratification values, labels, sort order, age bounds and comparability notes.
+- name: seed_geography
+  description: USPS abbreviation -> 2-digit state FIPS, name, level, Census region.
+  columns:
+  - name: geo_fips
+    data_tests:
+    - unique
+    - not_null
+- name: seed_data_source_crosswalk
+  description: Source data-source labels -> harmonized underlying data system (BRFSS, USRDS) and method
+    notes.
+- name: seed_source_registry
+  description: Generated from sources.yml by scripts/sync_source_seed.py. Do not edit by hand.
