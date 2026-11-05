@@ -47,6 +47,7 @@ test: lint dbt-test pytest ## lint + dbt build/tests + pytest
 analysis: transform ## gap & overlap report + pilot findings
 	$(BIN)/python -m analysis.gap_report
 	$(BIN)/python -m analysis.pilot
+	$(BIN)/python -m analysis.harmonization_report
 
 docs: setup ## dbt docs + generated data dictionary
 	$(DBT) docs generate $(DBT_ARGS)
