@@ -1,0 +1,408 @@
+{
+  "source_summary": [
+    {
+      "Source": "USDSS (b559-sbez)",
+      "Domain": "diabetes",
+      "Raw rows (filtered pull)": 63450,
+      "Harmonized rows": 63450,
+      "Indicators": 2,
+      "Years": "2000-2024",
+      "Pulled (UTC)": "2026-11-05"
+    },
+    {
+      "Source": "VEHSS BRFSS (vkwg-yswv)",
+      "Domain": "vision",
+      "Raw rows (filtered pull)": 45483,
+      "Harmonized rows": 17033,
+      "Indicators": 1,
+      "Years": "2013-2022",
+      "Pulled (UTC)": "2026-11-05"
+    },
+    {
+      "Source": "BRFSS Prevalence (dttw-5yxu)",
+      "Domain": "kidney",
+      "Raw rows (filtered pull)": 38545,
+      "Harmonized rows": 38489,
+      "Indicators": 2,
+      "Years": "2011-2025",
+      "Pulled (UTC)": "2026-11-05"
+    },
+    {
+      "Source": "CDI (hksd-2xuw)",
+      "Domain": "kidney",
+      "Raw rows (filtered pull)": 6741,
+      "Harmonized rows": 6533,
+      "Indicators": 2,
+      "Years": "2019-2023",
+      "Pulled (UTC)": "2026-11-05"
+    }
+  ],
+  "indicator_coverage": [
+    {
+      "Indicator": "CKD_SELF_REPORT",
+      "Source": "brfss_prevalence",
+      "Measure types": "crude_prevalence",
+      "Years": "2011-2025",
+      "N years": 15,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "no",
+      "Data source": "BRFSS"
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Source": "cdi",
+      "Measure types": "age_adjusted_prevalence, crude_prevalence",
+      "Years": "2019-2023",
+      "N years": 5,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "yes",
+      "Data source": "BRFSS"
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Source": "usdss_state",
+      "Measure types": "age_adjusted_prevalence, crude_prevalence",
+      "Years": "2000-2024",
+      "N years": 25,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "no",
+      "Data source": "BRFSS"
+    },
+    {
+      "Indicator": "DIAB_NEW_INC",
+      "Source": "usdss_state",
+      "Measure types": "age_adjusted_rate, crude_rate",
+      "Years": "2000-2024",
+      "N years": 25,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "no",
+      "Data source": "BRFSS"
+    },
+    {
+      "Indicator": "ESKD_INCIDENCE",
+      "Source": "cdi",
+      "Measure types": "adjusted_rate",
+      "Years": "2019-2022",
+      "N years": 4,
+      "States+DC": 51,
+      "Territories": 0,
+      "National row": "yes",
+      "Data source": "USRDS"
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Source": "brfss_prevalence",
+      "Measure types": "crude_prevalence",
+      "Years": "2013-2025",
+      "N years": 13,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "no",
+      "Data source": "BRFSS"
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Source": "vehss_brfss",
+      "Measure types": "age_adjusted_prevalence, crude_prevalence",
+      "Years": "2013-2022",
+      "N years": 10,
+      "States+DC": 51,
+      "Territories": 3,
+      "National row": "yes",
+      "Data source": "BRFSS"
+    }
+  ],
+  "ci_conventions": [
+    {
+      "Source": "brfss_prevalence",
+      "Unit": "percent",
+      "% with CI": 100.0,
+      "% with SE": 0.0,
+      "Negative lower CI (floored)": 0.0,
+      "Median CI width (pp)": 2.3
+    },
+    {
+      "Source": "cdi",
+      "Unit": "per_1000000",
+      "% with CI": 0.0,
+      "% with SE": 0.0,
+      "Negative lower CI (floored)": 0.0,
+      "Median CI width (pp)": NaN
+    },
+    {
+      "Source": "cdi",
+      "Unit": "percent",
+      "% with CI": 100.0,
+      "% with SE": 0.0,
+      "Negative lower CI (floored)": 0.0,
+      "Median CI width (pp)": 3.2
+    },
+    {
+      "Source": "usdss_state",
+      "Unit": "per_1000",
+      "% with CI": 100.0,
+      "% with SE": 100.0,
+      "Negative lower CI (floored)": 0.0,
+      "Median CI width (pp)": NaN
+    },
+    {
+      "Source": "usdss_state",
+      "Unit": "percent",
+      "% with CI": 100.0,
+      "% with SE": 100.0,
+      "Negative lower CI (floored)": 0.0,
+      "Median CI width (pp)": 2.8
+    },
+    {
+      "Source": "vehss_brfss",
+      "Unit": "percent",
+      "% with CI": 100.0,
+      "% with SE": 0.0,
+      "Negative lower CI (floored)": 18.0,
+      "Median CI width (pp)": 2.18
+    }
+  ],
+  "precision": [
+    {
+      "Source": "brfss_prevalence",
+      "Typical decimals": 1,
+      "Values with float artifacts (>4 dp)": 531,
+      "Example artifact length": 16
+    },
+    {
+      "Source": "cdi",
+      "Typical decimals": 1,
+      "Values with float artifacts (>4 dp)": 0,
+      "Example artifact length": null
+    },
+    {
+      "Source": "usdss_state",
+      "Typical decimals": 1,
+      "Values with float artifacts (>4 dp)": 0,
+      "Example artifact length": null
+    },
+    {
+      "Source": "vehss_brfss",
+      "Typical decimals": 2,
+      "Values with float artifacts (>4 dp)": 0,
+      "Example artifact length": null
+    }
+  ],
+  "suppression": [
+    {
+      "Source": "brfss_prevalence",
+      "Rows": 38489,
+      "% suppressed": 28.3,
+      "% not available": 4.2,
+      "Footnotes used for non-reported cells": "*** No responses for this data cell. \u2016 ** No responses for this data cell \u2016 * Prevalence estimate not available if the unweighted sample size for the denominator was < 50 or the Relative Standard Error (RSE) is > 0.3 or if the state did not collect data for that calendar year. \u2016 *** No responses for this data cell"
+    },
+    {
+      "Source": "cdi",
+      "Rows": 6533,
+      "% suppressed": 26.0,
+      "% not available": 2.6,
+      "Footnotes used for non-reported cells": "* No data available \u2016 **** Data suppressed; denominator < 50 or relative standard error > 30%"
+    },
+    {
+      "Source": "usdss_state",
+      "Rows": 63450,
+      "% suppressed": 9.7,
+      "% not available": 6.9,
+      "Footnotes used for non-reported cells": "No Data \u2016 Suppressed"
+    },
+    {
+      "Source": "vehss_brfss",
+      "Rows": 17033,
+      "% suppressed": 22.2,
+      "% not available": 0.0,
+      "Footnotes used for non-reported cells": "# Value suppressed"
+    }
+  ],
+  "overlap": [
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Source A": "cdi",
+      "Source B": "usdss_state",
+      "Measure": "age_adjusted_prevalence",
+      "Matched cells": 1620,
+      "Both reported": 1439,
+      "Mean diff (B-A, pp)": -0.11,
+      "Mean abs diff (pp)": 0.2,
+      "% within 0.5 pp": 92.1,
+      "Pearson r": 0.993,
+      "% CIs overlap": 100.0,
+      "Suppression disagreements": 29
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Source A": "cdi",
+      "Source B": "usdss_state",
+      "Measure": "crude_prevalence",
+      "Matched cells": 2160,
+      "Both reported": 1948,
+      "Mean diff (B-A, pp)": -0.03,
+      "Mean abs diff (pp)": 0.2,
+      "% within 0.5 pp": 88.8,
+      "Pearson r": 0.987,
+      "% CIs overlap": 99.7,
+      "Suppression disagreements": 20
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Source A": "brfss_prevalence",
+      "Source B": "vehss_brfss",
+      "Measure": "crude_prevalence",
+      "Matched cells": 3707,
+      "Both reported": 3158,
+      "Mean diff (B-A, pp)": -0.03,
+      "Mean abs diff (pp)": 0.05,
+      "% within 0.5 pp": 99.5,
+      "Pearson r": 1.0,
+      "% CIs overlap": 100.0,
+      "Suppression disagreements": 122
+    }
+  ],
+  "overlap_by_year": [
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Pair": "cdi vs usdss_state",
+      "Year": "2019",
+      "Both reported": 661,
+      "Mean abs diff (pp)": 0.07,
+      "% differing > 0.5 pp": 2.7
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Pair": "cdi vs usdss_state",
+      "Year": "2020",
+      "Both reported": 672,
+      "Mean abs diff (pp)": 0.68,
+      "% differing > 0.5 pp": 36.2
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Pair": "cdi vs usdss_state",
+      "Year": "2021",
+      "Both reported": 678,
+      "Mean abs diff (pp)": 0.09,
+      "% differing > 0.5 pp": 3.1
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Pair": "cdi vs usdss_state",
+      "Year": "2022",
+      "Both reported": 701,
+      "Mean abs diff (pp)": 0.08,
+      "% differing > 0.5 pp": 3.3
+    },
+    {
+      "Indicator": "DIAB_DX_PREV",
+      "Pair": "cdi vs usdss_state",
+      "Year": "2023",
+      "Both reported": 675,
+      "Mean abs diff (pp)": 0.1,
+      "% differing > 0.5 pp": 4.0
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2013",
+      "Both reported": 316,
+      "Mean abs diff (pp)": 0.05,
+      "% differing > 0.5 pp": 0.6
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2014",
+      "Both reported": 309,
+      "Mean abs diff (pp)": 0.04,
+      "% differing > 0.5 pp": 1.0
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2015",
+      "Both reported": 306,
+      "Mean abs diff (pp)": 0.04,
+      "% differing > 0.5 pp": 0.0
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2016",
+      "Both reported": 312,
+      "Mean abs diff (pp)": 0.05,
+      "% differing > 0.5 pp": 0.6
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2017",
+      "Both reported": 314,
+      "Mean abs diff (pp)": 0.05,
+      "% differing > 0.5 pp": 1.3
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2018",
+      "Both reported": 313,
+      "Mean abs diff (pp)": 0.04,
+      "% differing > 0.5 pp": 0.0
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2019",
+      "Both reported": 319,
+      "Mean abs diff (pp)": 0.05,
+      "% differing > 0.5 pp": 0.3
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2020",
+      "Both reported": 322,
+      "Mean abs diff (pp)": 0.04,
+      "% differing > 0.5 pp": 0.3
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2021",
+      "Both reported": 316,
+      "Mean abs diff (pp)": 0.05,
+      "% differing > 0.5 pp": 0.3
+    },
+    {
+      "Indicator": "VIS_DIFF_SEE",
+      "Pair": "brfss_prevalence vs vehss_brfss",
+      "Year": "2022",
+      "Both reported": 331,
+      "Mean abs diff (pp)": 0.06,
+      "% differing > 0.5 pp": 0.6
+    }
+  ],
+  "dropped": [
+    {
+      "Source": "VEHSS BRFSS",
+      "Excluded by design": "Cross-classified cells (>1 stratifier, e.g. age x sex x race)",
+      "Rows": 28450
+    },
+    {
+      "Source": "BRFSS Prevalence",
+      "Excluded by design": "Median-of-states rows (US / UW), not population estimates",
+      "Rows": 56
+    },
+    {
+      "Source": "CDI",
+      "Excluded by design": "CKD01 counts (Number) excluded from the rate-based mart",
+      "Rows": 208
+    }
+  ]
+}
