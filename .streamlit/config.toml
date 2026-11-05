@@ -1,0 +1,10 @@
+[server]
+enableStaticServing = true
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+font = "sans serif"
+primaryColor = "#2a78d6"
