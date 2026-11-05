@@ -166,9 +166,12 @@ with tab_explore:
             locations=state.geo_abbr, z=state.estimate, locationmode="USA-states",
             colorscale=style.SEQ_SCALE, marker_line_width=0.6,
             colorbar=dict(thickness=10, outlinewidth=0, title=style.fmt_unit(unit)),
-            customdata=state[["geo_name", "ci_low", "ci_high", "data_status"]].values,
-            hovertemplate="<b>%{customdata[0]}</b><br>%{z:.1f} (95% CI %{customdata[1]:.1f}–"
-                          "%{customdata[2]:.1f})<br>%{customdata[3]}<extra></extra>",
+            customdata=state.assign(ci_text=[
+                f" (95% CI {lo:.1f}–{hi:.1f})" if pd.notna(lo) and pd.notna(hi) else
+                " (no CI published)" for lo, hi in zip(state.ci_low, state.ci_high, strict=True)
+            ])[["geo_name", "ci_text", "data_status"]].values,
+            hovertemplate="<b>%{customdata[0]}</b><br>%{z:.1f}%{customdata[1]}"
+                          "<br>%{customdata[2]}<extra></extra>",
         ))
         fig.update_geos(scope="usa", projection_type="albers usa", showframe=False)
         fig.update_layout(height=430, margin=dict(l=0, r=0, t=10, b=0))
