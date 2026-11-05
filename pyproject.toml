@@ -15,3 +15,8 @@ select = ["E", "F", "I", "B", "UP", "W"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff.lint.per-file-ignores]
+# markdown templates: long table rows are intentional
+"analysis/harmonization_report.py" = ["E501"]
+"site_builder/build.py" = ["E501"]
