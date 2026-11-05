@@ -29,8 +29,8 @@ TOPOJSON = ROOT / "app" / "static" / "topojson" / "usa_110m.json"
 
 REPO_URL = "https://github.com/SaiKurmana/chronic-disease-surveillance-harmonization"
 PAGES_URL = "https://saikurmana.github.io/chronic-disease-surveillance-harmonization/"
-# TODO: set to the hosted Streamlit URL once deployed (e.g. Streamlit Community Cloud).
-APP_URL = ""
+# Hosted dashboard (Streamlit Community Cloud). Empty string falls back to the README quickstart.
+APP_URL = "https://cdsh-lab.streamlit.app/"
 APP_HREF = APP_URL or f"{REPO_URL}#quickstart"
 PLOTLY_JS = "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.1.1/plotly.min.js"
 MERMAID_JS = "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
@@ -101,6 +101,7 @@ def page(title: str, body: str, current: str, description: str = "",
 <footer><div class="wrap">
   <p class="disclaimer">{DISCLAIMER}</p>
   <p>Author: {AUTHOR} · <a href="{REPO_URL}">Source code</a> ·
+     <a href="{APP_HREF}">{"Dashboard" if APP_URL else "Run the dashboard"}</a> ·
      Data: <a href="https://data.cdc.gov">data.cdc.gov</a> (public, aggregate, de-identified)</p>
 </div></footer>
 </body>

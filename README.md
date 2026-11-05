@@ -9,8 +9,8 @@ systems say.
 
 > **Independent portfolio project. Not affiliated with, endorsed by, or produced for the CDC. Uses only publicly available data.**
 
-- **Live site:** <https://saikurmana.github.io/chronic-disease-surveillance-harmonization/> _(placeholder: live after GitHub Pages is enabled; see [Deploying](#deploying))_
-- **Interactive dashboard:** _placeholder: not yet hosted. Run it locally with `make app` (see [Quickstart](#quickstart))_
+- **Live site:** <https://saikurmana.github.io/chronic-disease-surveillance-harmonization/>
+- **Interactive dashboard:** <https://cdsh-lab.streamlit.app/> (Streamlit Community Cloud; or run it locally with `make app`, see [Quickstart](#quickstart))
 
 ## The problem
 
@@ -182,9 +182,9 @@ claims. Full discussion: [docs/limitations.md](docs/limitations.md).
   Pushing to `main` then runs `.github/workflows/pages.yml`.
 - **Weekly refresh:** `.github/workflows/data-refresh.yml` runs Mondays 09:17 UTC (or
   manually) and opens a PR. Optional secret: `SOCRATA_APP_TOKEN`.
-- **Dashboard hosting (optional):** Streamlit Community Cloud can run
-  `app/streamlit_app.py` from this repo. Set `APP_URL` in `site_builder/build.py` and
-  the link above when it is live.
+- **Dashboard hosting:** the dashboard runs on Streamlit Community Cloud at
+  <https://cdsh-lab.streamlit.app/> from `app/streamlit_app.py` on `main`. If the URL
+  changes, update `APP_URL` in `site_builder/build.py` and the link at the top of this README.
 
 ## Docs
 
