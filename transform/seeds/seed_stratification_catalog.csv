@@ -1,0 +1,47 @@
+strat_category,strat_value,strat_label,sort_order,age_min,age_max,comparability_note
+overall,overall,All adults,0,18,,
+sex,male,Male,10,,,
+sex,female,Female,11,,,
+age_group,18-24,18-24,20,18,24,BRFSS Prevalence band
+age_group,25-34,25-34,21,25,34,BRFSS Prevalence band
+age_group,35-44,35-44,22,35,44,BRFSS Prevalence band
+age_group,45-54,45-54,23,45,54,BRFSS Prevalence band
+age_group,55-64,55-64,24,55,64,BRFSS Prevalence band
+age_group,18-39,18-39,25,18,39,VEHSS band
+age_group,18-44,18-44,26,18,44,USDSS / CDI band
+age_group,40-64,40-64,27,40,64,VEHSS band
+age_group,45-64,45-64,28,45,64,USDSS / CDI band
+age_group,65-74,65-74,29,65,74,USDSS band
+age_group,75+,75+,30,75,,USDSS band
+age_group,65+,65+,31,65,,Shared by VEHSS / BRFSS / CDI; USDSS splits into 65-74 and 75+
+race_ethnicity,hispanic,Hispanic (any race),40,,,
+race_ethnicity,nh_white,"White, non-Hispanic",41,,,
+race_ethnicity,nh_black,"Black, non-Hispanic",42,,,
+race_ethnicity,nh_asian,"Asian, non-Hispanic",43,,,
+race_ethnicity,nh_asian_pi,"Asian or Pacific Islander, non-Hispanic",44,,,USDSS combines Asian and NHPI
+race_ethnicity,nh_nhpi,"Native Hawaiian or Pacific Islander, non-Hispanic",45,,,
+race_ethnicity,nh_aian,"American Indian or Alaska Native, non-Hispanic",46,,,
+race_ethnicity,nh_multiracial,"Multiracial, non-Hispanic",47,,,
+race_ethnicity,nh_other,"Other, non-Hispanic",48,,,
+race_ethnicity,asian,Asian (VEHSS; Hispanic ethnicity not specified),49,,,Not directly comparable to nh_asian
+race_ethnicity,aian,North American Native (VEHSS),50,,,Not directly comparable to nh_aian
+race_ethnicity,other,Other (VEHSS),51,,,
+education,lt_hs,Less than high school,60,,,
+education,hs_ged,High school or GED,61,,,
+education,gt_hs,More than high school,62,,,USDSS; equals some_college + college_grad in BRFSS
+education,some_college,Some post-high school,63,,,
+education,college_grad,College graduate,64,,,
+income,lt_15k,"Less than $15,000",70,,,
+income,15k_25k,"$15,000-$24,999",71,,,
+income,25k_35k,"$25,000-$34,999",72,,,
+income,35k_50k,"$35,000-$49,999",73,,,
+income,50k_plus,"$50,000+",74,,,Older BRFSS top band; overlaps the newer bands
+income,50k_100k,"$50,000-$99,999",75,,,
+income,100k_200k,"$100,000-$199,999",76,,,
+income,200k_plus,"$200,000+",77,,,
+diabetes_status,yes,Has diagnosed diabetes,80,,,VEHSS risk-factor subgroup
+diabetes_status,no,No diagnosed diabetes,81,,,VEHSS risk-factor subgroup
+hypertension_status,yes,Has hypertension,82,,,VEHSS risk-factor subgroup
+hypertension_status,no,No hypertension,83,,,VEHSS risk-factor subgroup
+smoking_status,yes,Current smoker,84,,,VEHSS risk-factor subgroup
+smoking_status,no,Not a current smoker,85,,,VEHSS risk-factor subgroup

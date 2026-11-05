@@ -6,7 +6,7 @@ VENV    ?= .venv
 BIN     := $(VENV)/bin
 # Which raw zone dbt reads: the committed offline snapshot (default) or a fresh pull.
 DATA_DIR ?= data/sample
-DBT     := cd transform && CDSH_DATA_DIR=../$(DATA_DIR) ../$(BIN)/dbt
+DBT     := cd transform && CDSH_DATA_DIR=$(abspath $(DATA_DIR)) ../$(BIN)/dbt
 DBT_ARGS := --profiles-dir . --project-dir .
 
 .PHONY: help setup ingest snapshot transform test dbt-test pytest lint analysis export docs site app clean

@@ -1,0 +1,262 @@
+version: 2
+models:
+- name: fct_indicator_estimates
+  description: 'Harmonized, long-format indicator estimates from all registered sources. Grain: source
+    x indicator x measure_type x geography x year x stratum. Every row carries provenance (source_key,
+    dataset_id, source_url, loaded_at) and the original source vocabulary (source_indicator_code, raw_strat_*).
+
+    '
+  columns:
+  - name: estimate_id
+    description: Surrogate key (first 16 hex chars of md5 over the grain columns; uniqueness is tested).
+    data_tests:
+    - unique
+    - not_null
+  - name: source_system
+    description: Publishing surveillance system (USDSS, VEHSS, BRFSS Prevalence & Trends, CDI).
+    data_tests:
+    - not_null
+  - name: source_key
+    description: Registry key from sources.yml.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_key
+  - name: dataset_id
+    description: Socrata dataset id on data.cdc.gov.
+    data_tests:
+    - not_null
+  - name: condition
+    description: Condition domain.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - diabetes
+          - vision
+          - kidney
+  - name: indicator_id
+    description: Harmonized indicator id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_indicator')
+          field: indicator_id
+  - name: indicator_name
+    description: Harmonized indicator name.
+  - name: source_indicator_code
+    description: Indicator/question code as published by the source.
+  - name: source_measure
+    description: Source measure label used for crosswalking (e.g. "Crude Prevalence", "Percentage | Age-Adjusted").
+  - name: measure_type
+    description: Harmonized measure type.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - crude_prevalence
+          - age_adjusted_prevalence
+          - crude_rate
+          - age_adjusted_rate
+          - adjusted_rate
+  - name: unit
+    description: Harmonized unit.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - percent
+          - per_1000
+          - per_1000000
+  - name: geo_level
+    description: national | state | territory.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - national
+          - state
+          - territory
+  - name: geo_fips
+    description: 2-digit FIPS code ('00' = United States).
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_geography')
+          field: geo_fips
+  - name: geo_name
+    description: Geography name from the harmonized geography seed (not the source spelling).
+  - name: year
+    description: Data year (single-year estimates only).
+    data_tests:
+    - not_null
+    - value_between:
+        arguments:
+          min_value: 2000
+          max_value: 2030
+  - name: strat_category
+    description: Harmonized stratification category.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - overall
+          - sex
+          - age_group
+          - race_ethnicity
+          - education
+          - income
+          - diabetes_status
+          - hypertension_status
+          - smoking_status
+  - name: strat_value
+    description: Harmonized stratification value.
+    data_tests:
+    - not_null
+  - name: estimate
+    description: Point estimate in `unit`. Null when suppressed or not available.
+    data_tests:
+    - not_null:
+        config:
+          where: data_status = 'reported'
+    - value_between:
+        name: percent_estimates_between_0_and_100
+        arguments:
+          min_value: 0
+          max_value: 100
+          where: unit = 'percent'
+    - value_between:
+        name: rate_estimates_non_negative
+        arguments:
+          min_value: 0
+          max_value: 1000000
+          where: unit <> 'percent'
+  - name: ci_low
+    description: Lower 95% confidence limit (null where the source does not publish one); floored at 0 for percentages, see ci_low_floored_flag.
+    data_tests:
+    - value_between:
+        arguments:
+          min_value: 0
+          max_value: 100
+          where: unit = 'percent'
+  - name: ci_low_published
+    description: Lower confidence limit exactly as published by the source (may be negative).
+  - name: ci_low_floored_flag
+    description: True when the published lower limit was below 0 and was floored to 0 in ci_low.
+    data_tests:
+    - not_null
+  - name: ci_high
+    description: Upper 95% confidence limit.
+    data_tests:
+    - value_between:
+        arguments:
+          min_value: 0
+          max_value: 100
+          where: unit = 'percent'
+  - name: data_source
+    description: Underlying data collection system (BRFSS, USRDS).
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - BRFSS
+          - USRDS
+  - name: suppressed_flag
+    description: True when the source suppressed the estimate (small sample / high RSE).
+    data_tests:
+    - not_null
+  - name: data_status
+    description: reported | suppressed | not_available.
+  - name: is_primary_source
+    description: True when this source is the indicator's designated primary source (dim_indicator.primary_source_key).
+    data_tests:
+    - not_null
+  - name: loaded_at
+    description: UTC timestamp of the raw pull this row came from.
+    data_tests:
+    - not_null
+  data_tests:
+  - ci_brackets_estimate:
+      arguments:
+        tolerance: 0.05
+  - unique_combination_check:
+      arguments:
+        columns:
+        - source_key
+        - indicator_id
+        - measure_type
+        - geo_fips
+        - year
+        - strat_category
+        - strat_value
+  - relationships_composite:
+      arguments:
+        to: ref('dim_stratification')
+        columns:
+        - strat_category
+        - strat_value
+- name: dim_indicator
+  description: Harmonized indicator catalog with observed coverage.
+  columns:
+  - name: indicator_id
+    data_tests:
+    - unique
+    - not_null
+  - name: primary_source_key
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_key
+- name: dim_geography
+  description: States, DC, territories and the nation with 2-digit FIPS.
+  columns:
+  - name: geo_fips
+    data_tests:
+    - unique
+    - not_null
+  - name: state_abbr
+    data_tests:
+    - unique
+    - not_null
+- name: dim_stratification
+  description: Harmonized stratification values with labels, sort order and age bounds.
+  columns:
+  - name: strat_key
+    data_tests:
+    - unique
+    - not_null
+- name: dim_source
+  description: Source registry (generated from sources.yml) — provenance for every number.
+  columns:
+  - name: source_key
+    data_tests:
+    - unique
+    - not_null
+  - name: dataset_id
+    data_tests:
+    - unique
+    - not_null
+- name: mart_pilot_state_profile
+  description: 'Pilot comparison: primary-source, overall-adult estimates for the pilot indicators by
+    state in the latest year shared by all of them, with state rank, tertile and a co-occurrence count
+    of top-tertile conditions.
+
+    '
+  columns:
+  - name: indicator_id
+    data_tests:
+    - not_null
+  - name: n_top_tertile_conditions
+    data_tests:
+    - not_null
