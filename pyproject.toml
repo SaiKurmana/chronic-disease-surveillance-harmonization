@@ -1,0 +1,22 @@
+[project]
+name = "chronic-disease-surveillance-harmonization"
+version = "0.1.0"
+description = "Harmonizing public diabetes, vision, and kidney surveillance data into a common indicator model"
+requires-python = ">=3.11"
+authors = [{ name = "Sai Kurmana, MPH, MS, CPHIMS" }]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["transform/target", "transform/dbt_packages", "_site", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff.lint.per-file-ignores]
+# markdown templates: long table rows are intentional
+"analysis/harmonization_report.py" = ["E501"]
+"site_builder/build.py" = ["E501"]

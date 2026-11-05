@@ -1,0 +1,116 @@
+# Source registry for the Chronic Disease Surveillance Harmonization Lab.
+#
+# Every dataset below was discovered through the Socrata catalog API
+#   https://api.us.socrata.com/api/catalog/v1?domains=data.cdc.gov&q=<term>
+# and verified by fetching rows from its SODA endpoint on the access date shown.
+# `python -m ingest.verify_sources` re-checks every entry (metadata + 3 rows).
+#
+# Fields
+#   key            stable identifier used for data/raw/<key>/ and dbt sources
+#   domain         diabetes | vision | kidney  (the ingest module that owns it)
+#   dataset_id     Socrata 4x4 id on data.cdc.gov
+#   where          SoQL $where filter applied server-side (keeps pulls small)
+#   access_date    date the dataset was last verified by hand for this repo
+#   license        as published in the Socrata metadata (null = none listed)
+
+catalog_api: https://api.us.socrata.com/api/catalog/v1?domains=data.cdc.gov
+domain_host: data.cdc.gov
+
+sources:
+  - key: usdss_state
+    domain: diabetes
+    name: USDSS State Burden/Magnitude Diabetes Indicators
+    system: U.S. Diabetes Surveillance System (USDSS)
+    dataset_id: b559-sbez
+    url: https://data.cdc.gov/d/b559-sbez
+    api_endpoint: https://data.cdc.gov/resource/b559-sbez.json
+    publisher: Centers for Disease Control and Prevention (data.cdc.gov)
+    upstream: https://usdss.cdc.gov/diabetes/surveillance.html
+    underlying_data_source: Behavioral Risk Factor Surveillance System (BRFSS)
+    license: null
+    access_date: 2026-11-05
+    where: "indicator in ('Diagnosed Diabetes','Newly Diagnosed Diabetes') AND unit in ('Percentage','Rate per 1,000')"
+    verified_rows_total: 114275
+    notes: >-
+      One row per state x year x stratum. Stratifiers live in separate columns
+      (age, race, sex, education); the `age` column also carries the
+      standardization method ("Crude" / "Age-Adjusted"). Suppression is flagged
+      in `estimatefootnote` ("Suppressed", "No Data").
+
+  - key: vehss_brfss
+    domain: vision
+    name: Behavioral Risk Factors - Vision and Eye Health Surveillance
+    system: Vision and Eye Health Surveillance System (VEHSS)
+    dataset_id: vkwg-yswv
+    url: https://data.cdc.gov/d/vkwg-yswv
+    api_endpoint: https://data.cdc.gov/resource/vkwg-yswv.json
+    publisher: Centers for Disease Control and Prevention
+    upstream: https://www.cdc.gov/vision-health-data/
+    underlying_data_source: Behavioral Risk Factor Surveillance System (BRFSS)
+    license: Open Data Commons Attribution License
+    access_date: 2026-11-05
+    where: null
+    verified_rows_total: 45483
+    notes: >-
+      Question/Response layout. Stratifiers in age, sex, raceethnicity and a
+      risk-factor pair (riskfactor, riskfactorresponse). Suppressed cells use
+      footnote symbol "#".
+
+  - key: brfss_prevalence
+    domain: kidney
+    also_used_by: [vision]
+    name: Behavioral Risk Factor Surveillance System (BRFSS) Prevalence Data (2011 to present)
+    system: BRFSS Prevalence & Trends
+    dataset_id: dttw-5yxu
+    url: https://data.cdc.gov/d/dttw-5yxu
+    api_endpoint: https://data.cdc.gov/resource/dttw-5yxu.json
+    publisher: Centers for Disease Control and Prevention
+    upstream: https://www.cdc.gov/brfss/brfssprevalence/
+    underlying_data_source: Behavioral Risk Factor Surveillance System (BRFSS)
+    license: Public Domain
+    access_date: 2026-11-05
+    where: "questionid in ('CHCKIDNY','CHCKDNY1','CHCKDNY2','BLIND') AND response = 'Yes'"
+    verified_rows_total: 38545
+    notes: >-
+      Used for self-reported chronic kidney disease ("Ever told you have kidney
+      disease?"), the closest state-level, stratified CKD prevalence measure on
+      data.cdc.gov. The question id changes across survey years (CHCKIDNY
+      2011-2017, CHCKDNY1 2018, CHCKDNY2 2019+). The BLIND question is pulled as
+      an overlap check against VEHSS. One stratifier per row via
+      break_out_category / break_out.
+
+  - key: cdi
+    domain: kidney
+    also_used_by: [diabetes]
+    name: U.S. Chronic Disease Indicators (CDI)
+    system: Chronic Disease Indicators
+    dataset_id: hksd-2xuw
+    url: https://data.cdc.gov/d/hksd-2xuw
+    api_endpoint: https://data.cdc.gov/resource/hksd-2xuw.json
+    publisher: CDC National Center for Chronic Disease Prevention and Health Promotion, Division of Population Health
+    upstream: https://www.cdc.gov/cdi/
+    underlying_data_source: USRDS (CKD01); BRFSS (DIA01)
+    license: Open Data Commons Open Database License
+    access_date: 2026-11-05
+    where: "questionid in ('CKD01','DIA01')"
+    verified_rows_total: 398793
+    notes: >-
+      CKD01 = incidence of treated end-stage kidney disease (USRDS), the only
+      kidney indicator in CDI. DIA01 = diabetes among adults (BRFSS), pulled as
+      an overlap check against USDSS. Up to three stratification
+      category/value pairs per row.
+
+# Searched but not used (recorded for transparency)
+considered_not_used:
+  - name: VEHSS Modeled Estimates
+    dataset_id: qeru-k2y2
+    reason: 23.8M rows; county-level Bayesian composite. Out of scope for a lightweight pilot.
+  - name: Diabetes State Burden Toolkit - Health Burden
+    dataset_id: ircd-wk4g
+    reason: Reports conditions among people with diabetes (not population prevalence).
+  - name: CDC Chronic Kidney Disease Surveillance System (nccd.cdc.gov/ckd)
+    dataset_id: null
+    reason: Not published on data.cdc.gov Socrata; site returned HTTP 503 on 2026-11-05.
+  - name: PLACES (county/place/tract releases)
+    dataset_id: i46a-9kgh
+    reason: Small-area model-based estimates with no state-level rows; candidate for a future county extension.

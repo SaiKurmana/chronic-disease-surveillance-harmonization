@@ -1,0 +1,780 @@
+{
+  "generated_at": "2026-11-05T05:08:49.864067Z",
+  "dbt_version": "1.10.13",
+  "status_counts": {
+    "pass": 76,
+    "warn": 1
+  },
+  "tests": [
+    {
+      "name": "assert_overlap_sources_agree",
+      "test_type": "singular",
+      "model": "",
+      "column": "",
+      "status": "warn",
+      "failures": 179,
+      "severity": "warn",
+      "message": "Got 179 results, configured to warn if != 0"
+    },
+    {
+      "name": "not_null_dim_geography_geo_fips",
+      "test_type": "not_null",
+      "model": "dim_geography",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_dim_geography_state_abbr",
+      "test_type": "not_null",
+      "model": "dim_geography",
+      "column": "state_abbr",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_geography_geo_fips",
+      "test_type": "unique",
+      "model": "dim_geography",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_geography_state_abbr",
+      "test_type": "unique",
+      "model": "dim_geography",
+      "column": "state_abbr",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_dim_indicator_indicator_id",
+      "test_type": "not_null",
+      "model": "dim_indicator",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_dim_indicator_primary_source_key__source_key__ref_dim_source_",
+      "test_type": "relationships",
+      "model": "dim_indicator",
+      "column": "primary_source_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_indicator_indicator_id",
+      "test_type": "unique",
+      "model": "dim_indicator",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_dim_source_dataset_id",
+      "test_type": "not_null",
+      "model": "dim_source",
+      "column": "dataset_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_dim_source_source_key",
+      "test_type": "not_null",
+      "model": "dim_source",
+      "column": "source_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_source_dataset_id",
+      "test_type": "unique",
+      "model": "dim_source",
+      "column": "dataset_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_source_source_key",
+      "test_type": "unique",
+      "model": "dim_source",
+      "column": "source_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_dim_stratification_strat_key",
+      "test_type": "not_null",
+      "model": "dim_stratification",
+      "column": "strat_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_dim_stratification_strat_key",
+      "test_type": "unique",
+      "model": "dim_stratification",
+      "column": "strat_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_condition__diabetes__vision__kidney",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "condition",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_data_source__BRFSS__USRDS",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "data_source",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_geo_level__national__state__territory",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "geo_level",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_measure_type__crude_prevalence__age_adjusted_prevalence__crude_rate__age_adjusted_rate__adjusted_rate",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "measure_type",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_strat_category__overall__sex__age_group__race_ethnicity__education__income__diabetes_status__hypertension_status__smoking_status",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "strat_category",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_fct_indicator_estimates_unit__percent__per_1000__per_1000000",
+      "test_type": "accepted_values",
+      "model": "fct_indicator_estimates",
+      "column": "unit",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "ci_brackets_estimate_fct_indicator_estimates_0_05",
+      "test_type": "ci_brackets_estimate",
+      "model": "fct_indicator_estimates",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_ci_low_floored_flag",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "ci_low_floored_flag",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_condition",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "condition",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_data_source",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "data_source",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_dataset_id",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "dataset_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_estimate",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "estimate",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_estimate_id",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "estimate_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_geo_fips",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_geo_level",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "geo_level",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_indicator_id",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_is_primary_source",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "is_primary_source",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_loaded_at",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "loaded_at",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_measure_type",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "measure_type",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_source_key",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "source_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_source_system",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "source_system",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_strat_category",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "strat_category",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_strat_value",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "strat_value",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_suppressed_flag",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "suppressed_flag",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_unit",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "unit",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_fct_indicator_estimates_year",
+      "test_type": "not_null",
+      "model": "fct_indicator_estimates",
+      "column": "year",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "percent_estimates_between_0_and_100",
+      "test_type": "value_between",
+      "model": "fct_indicator_estimates",
+      "column": "estimate",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "rate_estimates_non_negative",
+      "test_type": "value_between",
+      "model": "fct_indicator_estimates",
+      "column": "estimate",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_composite_fct_indicator_estimates_strat_category__strat_value__ref_dim_stratification_",
+      "test_type": "relationships_composite",
+      "model": "fct_indicator_estimates",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_fct_indicator_estimates_geo_fips__geo_fips__ref_dim_geography_",
+      "test_type": "relationships",
+      "model": "fct_indicator_estimates",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_fct_indicator_estimates_indicator_id__indicator_id__ref_dim_indicator_",
+      "test_type": "relationships",
+      "model": "fct_indicator_estimates",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_fct_indicator_estimates_source_key__source_key__ref_dim_source_",
+      "test_type": "relationships",
+      "model": "fct_indicator_estimates",
+      "column": "source_key",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_combination_check_fct_indicator_estimates_source_key__indicator_id__measure_type__geo_fips__year__strat_category__strat_value",
+      "test_type": "unique_combination_check",
+      "model": "fct_indicator_estimates",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_fct_indicator_estimates_estimate_id",
+      "test_type": "unique",
+      "model": "fct_indicator_estimates",
+      "column": "estimate_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_fct_indicator_estimates_ci_high__100__0",
+      "test_type": "value_between",
+      "model": "fct_indicator_estimates",
+      "column": "ci_high",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_fct_indicator_estimates_ci_low__100__0",
+      "test_type": "value_between",
+      "model": "fct_indicator_estimates",
+      "column": "ci_low",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_fct_indicator_estimates_year__2030__2000",
+      "test_type": "value_between",
+      "model": "fct_indicator_estimates",
+      "column": "year",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_int_brfss__estimates_n_strat_dims__1__0",
+      "test_type": "value_between",
+      "model": "int_brfss__estimates",
+      "column": "n_strat_dims",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_int_cdi__estimates_n_strat_dims__1__0",
+      "test_type": "value_between",
+      "model": "int_cdi__estimates",
+      "column": "n_strat_dims",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_int_estimates__unioned_data_status__reported__suppressed__not_available",
+      "test_type": "accepted_values",
+      "model": "int_estimates__unioned",
+      "column": "data_status",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_int_estimates__unioned_data_status",
+      "test_type": "not_null",
+      "model": "int_estimates__unioned",
+      "column": "data_status",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unmapped_data_source_crosswalk",
+      "test_type": "unmapped_crosswalk_values",
+      "model": "int_estimates__unioned",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unmapped_geography_crosswalk",
+      "test_type": "unmapped_crosswalk_values",
+      "model": "int_estimates__unioned",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unmapped_indicator_crosswalk",
+      "test_type": "unmapped_crosswalk_values",
+      "model": "int_estimates__unioned",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unmapped_stratification_crosswalk",
+      "test_type": "unmapped_crosswalk_values",
+      "model": "int_estimates__unioned",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "value_between_int_usdss__estimates_n_strat_dims__1__0",
+      "test_type": "value_between",
+      "model": "int_usdss__estimates",
+      "column": "n_strat_dims",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_mart_pilot_state_profile_indicator_id",
+      "test_type": "not_null",
+      "model": "mart_pilot_state_profile",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_mart_pilot_state_profile_n_top_tertile_conditions",
+      "test_type": "not_null",
+      "model": "mart_pilot_state_profile",
+      "column": "n_top_tertile_conditions",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_seed_geography_geo_fips",
+      "test_type": "not_null",
+      "model": "seed_geography",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_seed_geography_geo_fips",
+      "test_type": "unique",
+      "model": "seed_geography",
+      "column": "geo_fips",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_seed_indicator_catalog_indicator_id",
+      "test_type": "not_null",
+      "model": "seed_indicator_catalog",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_seed_indicator_catalog_indicator_id",
+      "test_type": "unique",
+      "model": "seed_indicator_catalog",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_seed_indicator_crosswalk_indicator_id__indicator_id__ref_seed_indicator_catalog_",
+      "test_type": "relationships",
+      "model": "seed_indicator_crosswalk",
+      "column": "indicator_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "relationships_composite_seed_stratification_crosswalk_strat_category__strat_value__ref_seed_stratification_catalog_",
+      "test_type": "relationships_composite",
+      "model": "seed_stratification_crosswalk",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "unique_combination_check_seed_stratification_crosswalk_source_key__raw_strat_category__raw_strat_value",
+      "test_type": "unique_combination_check",
+      "model": "seed_stratification_crosswalk",
+      "column": "",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_stg_brfss__prevalence_response__Yes",
+      "test_type": "accepted_values",
+      "model": "stg_brfss__prevalence",
+      "column": "response",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_stg_brfss__prevalence_location_abbr",
+      "test_type": "not_null",
+      "model": "stg_brfss__prevalence",
+      "column": "location_abbr",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_stg_cdi__indicators_question_id__CKD01__DIA01",
+      "test_type": "accepted_values",
+      "model": "stg_cdi__indicators",
+      "column": "question_id",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_stg_usdss__state_indicators_unit__Percentage__Rate_per_1_000",
+      "test_type": "accepted_values",
+      "model": "stg_usdss__state_indicators",
+      "column": "unit",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_stg_usdss__state_indicators_location_abbr",
+      "test_type": "not_null",
+      "model": "stg_usdss__state_indicators",
+      "column": "location_abbr",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_stg_usdss__state_indicators_year",
+      "test_type": "not_null",
+      "model": "stg_usdss__state_indicators",
+      "column": "year",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "accepted_values_stg_vehss__brfss_data_value_type__Crude_Prevalence__Age_adjusted_Prevalence",
+      "test_type": "accepted_values",
+      "model": "stg_vehss__brfss",
+      "column": "data_value_type",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    },
+    {
+      "name": "not_null_stg_vehss__brfss_location_abbr",
+      "test_type": "not_null",
+      "model": "stg_vehss__brfss",
+      "column": "location_abbr",
+      "status": "pass",
+      "failures": 0,
+      "severity": "ERROR",
+      "message": null
+    }
+  ]
+}

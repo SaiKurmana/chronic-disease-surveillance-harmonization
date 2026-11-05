@@ -1,0 +1,33 @@
+# Raw parquet snapshots written by `python -m ingest`. They are read through the
+# `latest_snapshot` macro (external parquet), so these entries document lineage
+# and provenance rather than physical tables.
+version: 2
+sources:
+- name: raw
+  description: Raw zone (data/raw or the committed data/sample snapshot). One folder per source key.
+  meta:
+    registry: sources.yml
+  tables:
+  - name: usdss_state
+    description: USDSS State Burden/Magnitude Diabetes Indicators — data.cdc.gov b559-sbez (https://data.cdc.gov/d/b559-sbez).
+    meta:
+      dataset_id: b559-sbez
+      domain: diabetes
+  - name: vehss_brfss
+    description: Behavioral Risk Factors – Vision and Eye Health Surveillance (VEHSS) — data.cdc.gov vkwg-yswv
+      (https://data.cdc.gov/d/vkwg-yswv).
+    meta:
+      dataset_id: vkwg-yswv
+      domain: vision
+  - name: brfss_prevalence
+    description: BRFSS Prevalence Data (2011 to present) — data.cdc.gov dttw-5yxu (https://data.cdc.gov/d/dttw-5yxu).
+      Kidney + BLIND questions.
+    meta:
+      dataset_id: dttw-5yxu
+      domain: kidney
+  - name: cdi
+    description: U.S. Chronic Disease Indicators — data.cdc.gov hksd-2xuw (https://data.cdc.gov/d/hksd-2xuw).
+      CKD01 and DIA01.
+    meta:
+      dataset_id: hksd-2xuw
+      domain: kidney

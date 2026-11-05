@@ -1,0 +1,155 @@
+{
+  "pilot_year": 2022,
+  "n_states": 51,
+  "indicators": [
+    {
+      "Indicator": "Self-reported chronic kidney disease",
+      "Source": "brfss_prevalence",
+      "Measure": "crude_prevalence",
+      "Unit": "%",
+      "States": 51,
+      "Median": 3.5,
+      "Lowest": "AK 2.4",
+      "Highest": "WV 4.9",
+      "Max/min ratio": 2.04,
+      "Top-third states with CI above median": "14 of 17"
+    },
+    {
+      "Indicator": "Diagnosed diabetes among adults",
+      "Source": "usdss_state",
+      "Measure": "crude_prevalence",
+      "Unit": "%",
+      "States": 51,
+      "Median": 11.5,
+      "Lowest": "DC 8.0",
+      "Highest": "WV 17.4",
+      "Max/min ratio": 2.17,
+      "Top-third states with CI above median": "15 of 17"
+    },
+    {
+      "Indicator": "Incidence of treated end-stage kidney disease",
+      "Source": "cdi",
+      "Measure": "adjusted_rate",
+      "Unit": "per 1,000,000",
+      "States": 51,
+      "Median": 336.3,
+      "Lowest": "VT 128.2",
+      "Highest": "OK 460.0",
+      "Max/min ratio": 3.59,
+      "Top-third states with CI above median": "no CI published"
+    },
+    {
+      "Indicator": "Blind or serious difficulty seeing",
+      "Source": "vehss_brfss",
+      "Measure": "crude_prevalence",
+      "Unit": "%",
+      "States": 51,
+      "Median": 5.2,
+      "Lowest": "UT 3.5",
+      "Highest": "MS 10.5",
+      "Max/min ratio": 3.01,
+      "Top-third states with CI above median": "16 of 17"
+    }
+  ],
+  "spearman": {
+    "CKD_SELF_REPORT": {
+      "CKD_SELF_REPORT": 1.0,
+      "DIAB_DX_PREV": 0.71,
+      "ESKD_INCIDENCE": 0.48,
+      "VIS_DIFF_SEE": 0.55
+    },
+    "DIAB_DX_PREV": {
+      "CKD_SELF_REPORT": 0.71,
+      "DIAB_DX_PREV": 1.0,
+      "ESKD_INCIDENCE": 0.7,
+      "VIS_DIFF_SEE": 0.69
+    },
+    "ESKD_INCIDENCE": {
+      "CKD_SELF_REPORT": 0.48,
+      "DIAB_DX_PREV": 0.7,
+      "ESKD_INCIDENCE": 1.0,
+      "VIS_DIFF_SEE": 0.55
+    },
+    "VIS_DIFF_SEE": {
+      "CKD_SELF_REPORT": 0.55,
+      "DIAB_DX_PREV": 0.69,
+      "ESKD_INCIDENCE": 0.55,
+      "VIS_DIFF_SEE": 1.0
+    }
+  },
+  "cooccurrence_distribution": [
+    {
+      "Pilot indicators in top third": 4.0,
+      "States": 6
+    },
+    {
+      "Pilot indicators in top third": 3.0,
+      "States": 7
+    },
+    {
+      "Pilot indicators in top third": 2.0,
+      "States": 6
+    },
+    {
+      "Pilot indicators in top third": 1.0,
+      "States": 11
+    },
+    {
+      "Pilot indicators in top third": 0.0,
+      "States": 21
+    }
+  ],
+  "states_top_all": [
+    "AR",
+    "KY",
+    "LA",
+    "OK",
+    "TN",
+    "WV"
+  ],
+  "states_top_3plus": [
+    "AR",
+    "KY",
+    "LA",
+    "OK",
+    "TN",
+    "WV",
+    "AL",
+    "FL",
+    "IN",
+    "MS",
+    "OH",
+    "SC",
+    "TX"
+  ],
+  "region_counts_3plus": {
+    "South": 11,
+    "Midwest": 2
+  },
+  "vision_by_diabetes": [
+    {
+      "Measure": "age_adjusted_prevalence",
+      "Diabetes status": "no",
+      "States reporting": 51,
+      "Median of states (%)": 4.4
+    },
+    {
+      "Measure": "age_adjusted_prevalence",
+      "Diabetes status": "yes",
+      "States reporting": 51,
+      "Median of states (%)": 10.4
+    },
+    {
+      "Measure": "crude_prevalence",
+      "Diabetes status": "no",
+      "States reporting": 51,
+      "Median of states (%)": 4.5
+    },
+    {
+      "Measure": "crude_prevalence",
+      "Diabetes status": "yes",
+      "States reporting": 51,
+      "Median of states (%)": 10.8
+    }
+  ]
+}
