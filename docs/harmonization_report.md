@@ -53,9 +53,10 @@ interchangeable can still diverge for a single year**, which is why the model
 keeps both and marks a primary source instead of averaging them.
 
 The two sources also disagree on suppression for 20 crude
-diabetes cells and 122 vision cells (one publishes a value,
-the other suppresses it). The same underlying survey can show a value in one
-system and hide it in another.
+diabetes cells and 122 vision cells: one system marks the
+cell suppressed and the other does not (it publishes a value or marks it not
+available). The same underlying survey can show a value in one system and hide
+it in another.
 
 ### 2. Coverage gaps are larger than schema gaps
 

@@ -244,7 +244,8 @@ def suppression(con) -> pd.DataFrame:
                count(*) as "Rows",
                round(100.0 * avg((data_status = 'suppressed')::int), 1) as "% suppressed",
                round(100.0 * avg((data_status = 'not_available')::int), 1) as "% not available",
-               string_agg(distinct footnote, ' ‖ ') filter (where data_status <> 'reported')
+               string_agg(distinct footnote, ' ‖ ' order by footnote)
+                 filter (where data_status <> 'reported')
                  as "Footnotes used for non-reported cells"
         from fct_indicator_estimates group by 1 order by 1""")
 
