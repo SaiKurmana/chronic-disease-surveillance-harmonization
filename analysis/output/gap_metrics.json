@@ -7,7 +7,7 @@
       "Harmonized rows": 63450,
       "Indicators": 2,
       "Years": "2000-2024",
-      "Pulled (UTC)": "2026-11-05"
+      "Pulled (UTC)": "2026-11-09"
     },
     {
       "Source": "VEHSS BRFSS (vkwg-yswv)",
@@ -16,7 +16,7 @@
       "Harmonized rows": 17033,
       "Indicators": 1,
       "Years": "2013-2022",
-      "Pulled (UTC)": "2026-11-05"
+      "Pulled (UTC)": "2026-11-09"
     },
     {
       "Source": "BRFSS Prevalence (dttw-5yxu)",
@@ -25,7 +25,7 @@
       "Harmonized rows": 38489,
       "Indicators": 2,
       "Years": "2011-2025",
-      "Pulled (UTC)": "2026-11-05"
+      "Pulled (UTC)": "2026-11-09"
     },
     {
       "Source": "CDI (hksd-2xuw)",
@@ -34,7 +34,7 @@
       "Harmonized rows": 6533,
       "Indicators": 2,
       "Years": "2019-2023",
-      "Pulled (UTC)": "2026-11-05"
+      "Pulled (UTC)": "2026-11-09"
     }
   ],
   "indicator_coverage": [
