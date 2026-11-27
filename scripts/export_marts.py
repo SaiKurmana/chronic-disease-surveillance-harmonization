@@ -44,8 +44,12 @@ def export_tables(con: duckdb.DuckDBPyConnection) -> dict[str, int]:
             if name == "fct_indicator_estimates"
             else " order by all"
         )
+        # estimate_id is recomputed on read (analysis.common.mart_view_sql): it is a
+        # hash of the grain and would otherwise be ~40% of the committed file.
+        cols = "* exclude (estimate_id)" if name == "fct_indicator_estimates" else "*"
         con.execute(
-            f"copy (select * from {t}{order}) to '{out}' (format parquet, compression zstd)"
+            f"copy (select {cols} from {t}{order}) to '{out}' "
+            "(format parquet, compression zstd, compression_level 19)"
         )
         counts[name] = con.execute(f"select count(*) from {t}").fetchone()[0]
     return counts

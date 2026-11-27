@@ -56,3 +56,38 @@ def test_site_builds(tmp_path, monkeypatch):
     assert (tmp_path / "_site" / "dbt-docs" / "index.html").exists()
     for page in ("gap-report.html", "findings.html", "limitations.html", "sop.html"):
         assert (tmp_path / "_site" / page).exists(), page
+
+
+def test_recomputed_estimate_id_is_unique():
+    import duckdb
+
+    from analysis.common import MART, mart_view_sql
+
+    con = duckdb.connect()
+    con.execute(mart_view_sql(MART / "fct_indicator_estimates.parquet"))
+    n, distinct = con.execute(
+        "select count(*), count(distinct estimate_id) from fct_indicator_estimates"
+    ).fetchone()
+    assert n == distinct > 0
+
+
+@pytest.mark.skipif(
+    not (ROOT / "data" / "warehouse.duckdb").exists(),
+    reason="local warehouse not built (run `make transform`)",
+)
+def test_recomputed_estimate_id_matches_dbt():
+    """The read-time key must equal the key dbt built and tested (unique/not_null)."""
+    import duckdb
+
+    from analysis.common import MART, mart_view_sql
+
+    con = duckdb.connect()
+    con.execute(f"attach '{(ROOT / 'data' / 'warehouse.duckdb').as_posix()}' as wh (read_only)")
+    con.execute(mart_view_sql(MART / "fct_indicator_estimates.parquet"))
+    grain = "source_key, indicator_id, measure_type, geo_fips, year, strat_category, strat_value"
+    mismatches = con.execute(f"""
+        select count(*) from fct_indicator_estimates e
+        full join wh.main.fct_indicator_estimates w using ({grain})
+        where e.estimate_id is distinct from w.estimate_id
+    """).fetchone()[0]
+    assert mismatches == 0

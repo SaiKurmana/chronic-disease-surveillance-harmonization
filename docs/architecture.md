@@ -91,6 +91,11 @@ erDiagram
 ```
 
 Grain: one row per **source × indicator × measure type × geography × year × stratum**.
+`estimate_id` is a 64-bit md5 prefix over those grain columns. The committed
+`data/mart/fct_indicator_estimates.parquet` omits it, because a hash does not
+compress and would be about 40% of the file. The app and the analysis scripts
+recompute it on read with the same expression (`analysis.common.mart_view_sql`), and
+a test checks the recomputed key equals the one dbt built.
 The same harmonized indicator can appear from more than one source (for example
 diagnosed diabetes from USDSS and from CDI). `dim_indicator.primary_source_key`
 names the source used for headline comparisons; `is_primary_source` marks those
