@@ -53,7 +53,7 @@ flowchart TB
 | Layer | Where | What it does | Key guarantees |
 |---|---|---|---|
 | Registry | `sources.yml` | One entry per dataset: id, URL, publisher, license, filter, access date | Single source of truth; `seed_source_registry.csv` is generated from it and a test fails on drift |
-| Ingest | `ingest/` | Paged SODA pulls ordered by `:id`; per-domain modules | Retries with exponential backoff (429/5xx), no retry on other 4xx; row-count check against `count(*)`; idempotent (skips when upstream `rowsUpdatedAt` and filter are unchanged); stable schema even for all-null columns |
+| Ingest | `ingest/` | Paged SODA pulls ordered by `:id`; per-domain modules | Retries with exponential backoff (429/5xx), no retry on other 4xx; row-count check against `count(*)`; idempotent (skips a source when its upstream `rowsUpdatedAt` and filter match the latest snapshot in `data/raw` or the committed `data/sample`); stable schema even for all-null columns |
 | Raw zone | `data/raw/<key>/<key>__<UTC>.parquet` | Immutable snapshots with `_loaded_at`, `_dataset_id`, `_source_rows_updated_at` | Last 3 snapshots kept; dbt reads only the latest |
 | Offline snapshot | `data/sample/` | Verbatim copy of the latest real pull, committed | < 5 MB guard; lets CI, the app and the site build with no network |
 | Staging | `transform/models/staging` | Rename, type-cast, trim/collapse whitespace | No business logic |
@@ -127,7 +127,12 @@ downstream models from building.
 |---|---|---|
 | `ci.yml` | pull request, push to non-main branches | ruff, `dbt build` on the committed snapshot, pytest |
 | `pages.yml` | push to `main`, manual | `make site` then `actions/deploy-pages` |
-| `data-refresh.yml` | weekly (Mondays 09:17 UTC), manual | `make ingest` (live pull), `make transform`, regenerate reports, open a PR with the refreshed snapshot |
+| `data-refresh.yml` | weekly (Mondays 09:17 UTC), manual | Live pull of only the sources that changed upstream, `make transform`, regenerate reports, and open a PR only if a committed file changed (manual `force` re-pulls everything) |
+
+A week with no upstream change leaves every committed file byte-identical: unchanged
+sources are not re-pulled, `ingest.snapshot` only promotes newer pulls, and the
+export rewrites a file only when its content changes (JSON timestamps record the
+last change). So no PR is opened that week.
 
 The refresh workflow never pushes to `main` directly: new data arrives as a pull
 request, so the dbt tests and a human review gate every upstream change.
