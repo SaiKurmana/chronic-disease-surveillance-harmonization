@@ -15,11 +15,32 @@ OUT = ROOT / "analysis" / "output"
 
 SOURCE_ORDER = ["usdss_state", "vehss_brfss", "brfss_prevalence", "cdi"]
 
+# The exported fact table omits `estimate_id` (a 64-bit md5 prefix over the grain,
+# ~1 MB of incompressible hex) and readers recompute it with the exact expression
+# used in transform/models/marts/fct_indicator_estimates.sql.
+# tests/test_app_and_site.py checks the two stay identical.
+FCT = "fct_indicator_estimates"
+ESTIMATE_ID_SQL = (
+    "left(md5(concat_ws('|', source_key, indicator_id, measure_type, geo_fips, year, "
+    "strat_category, strat_value)), 16)"
+)
+
+
+def mart_view_sql(path: Path) -> str:
+    """CREATE VIEW statement for one exported mart file (restores estimate_id)."""
+    src = f"read_parquet('{path.as_posix()}')"
+    if path.stem == FCT:
+        return (
+            f"create or replace view {FCT} as "
+            f"select {ESTIMATE_ID_SQL} as estimate_id, * from {src}"
+        )
+    return f"create or replace view {path.stem} as select * from {src}"
+
 
 def connect() -> duckdb.DuckDBPyConnection:
     con = duckdb.connect()
     for p in MART.glob("*.parquet"):
-        con.execute(f"create or replace view {p.stem} as select * from read_parquet('{p}')")
+        con.execute(mart_view_sql(p))
     for key in SOURCE_ORDER:
         con.execute(
             f"create or replace view raw_{key} as select * from "

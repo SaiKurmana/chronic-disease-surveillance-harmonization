@@ -101,7 +101,7 @@ def write_snapshot(
     out_dir = root / key
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"{key}__{ts}.parquet"
-    df.to_parquet(out, index=False, compression="zstd")
+    df.to_parquet(out, index=False, compression="zstd", compression_level=19)
 
     manifest = read_manifest(root)
     manifest[key] = {
