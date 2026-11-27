@@ -25,6 +25,8 @@ log = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = REPO_ROOT / "data" / "raw"
+# Committed offline snapshot. Same layout and manifest format as RAW_DIR.
+SAMPLE_DIR = REPO_ROOT / "data" / "sample"
 
 
 def utc_now() -> datetime:

@@ -1,8 +1,10 @@
 name: Weekly data refresh
 
-# Pulls the latest public data from data.cdc.gov, rebuilds and tests the
+# Pulls public data from data.cdc.gov for sources whose upstream version
+# (rowsUpdatedAt) changed since the committed snapshot, rebuilds and tests the
 # harmonized model, regenerates reports, and proposes the result as a pull
-# request. Nothing is pushed to main directly.
+# request. If nothing changed upstream, no committed file changes and no PR is
+# opened. Nothing is pushed to main directly. The `force` input re-pulls all.
 #
 # Optional repository secret SOCRATA_APP_TOKEN raises Socrata rate limits.
 # Note: PRs opened with the default GITHUB_TOKEN do not trigger other

@@ -181,7 +181,10 @@ claims. Full discussion: [docs/limitations.md](docs/limitations.md).
 - **GitHub Pages:** in repository Settings → Pages, set *Source* to **GitHub Actions**.
   Pushing to `main` then runs `.github/workflows/pages.yml`.
 - **Weekly refresh:** `.github/workflows/data-refresh.yml` runs Mondays 09:17 UTC (or
-  manually) and opens a PR. Optional secret: `SOCRATA_APP_TOKEN`.
+  manually). It re-pulls only sources CDC has updated and opens a PR only when the data
+  changed; a quiet week produces no PR. It needs *Settings → Actions → General →
+  Allow GitHub Actions to create and approve pull requests*. Optional secret:
+  `SOCRATA_APP_TOKEN`.
 - **Dashboard hosting:** the dashboard runs on Streamlit Community Cloud at
   <https://cdsh-lab.streamlit.app/> from `app/streamlit_app.py` on `main`. If the URL
   changes, update `APP_URL` in `site_builder/build.py` and the link at the top of this README.

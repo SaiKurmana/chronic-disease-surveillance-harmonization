@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from ingest import diabetes, kidney, vision
-from ingest.storage import RAW_DIR
+from ingest.storage import RAW_DIR, SAMPLE_DIR
 
 MODULES = {"diabetes": diabetes, "vision": vision, "kidney": kidney}
 
@@ -18,6 +18,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--domain", default="all", choices=["all", *MODULES])
     parser.add_argument("--force", action="store_true", help="re-pull even if unchanged")
     parser.add_argument("--root", type=Path, default=RAW_DIR, help="raw zone directory")
+    parser.add_argument(
+        "--baseline",
+        type=Path,
+        default=SAMPLE_DIR,
+        help="committed snapshot to compare against; unchanged sources are skipped",
+    )
+    parser.add_argument(
+        "--no-baseline", action="store_true", help="compare only against --root"
+    )
     args = parser.parse_args(argv)
 
     logging.basicConfig(
@@ -29,7 +38,8 @@ def main(argv: list[str] | None = None) -> int:
     failures = []
     for d in domains:
         try:
-            MODULES[d].run(force=args.force, root=args.root)
+            baseline = None if args.no_baseline else args.baseline
+            MODULES[d].run(force=args.force, root=args.root, baseline=baseline)
         except Exception as exc:  # keep going so one outage does not block others
             logging.getLogger("ingest").error("%s domain failed: %s", d, exc)
             failures.append(d)
