@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from analysis import style  # noqa: E402
+from analysis.common import mart_view_sql  # noqa: E402
 
 MART = ROOT / "data" / "mart"
 OUT = ROOT / "analysis" / "output"
@@ -38,7 +39,7 @@ st.set_page_config(page_title="Surveillance Harmonization Lab", page_icon="🩺"
 def con() -> duckdb.DuckDBPyConnection:
     c = duckdb.connect()
     for p in MART.glob("*.parquet"):
-        c.execute(f"create view {p.stem} as select * from read_parquet('{p.as_posix()}')")
+        c.execute(mart_view_sql(p))
     return c
 
 
