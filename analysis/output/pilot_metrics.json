@@ -54,12 +54,12 @@
   "spearman": {
     "CKD_SELF_REPORT": {
       "CKD_SELF_REPORT": 1.0,
-      "DIAB_DX_PREV": 0.71,
+      "DIAB_DX_PREV": 0.7,
       "ESKD_INCIDENCE": 0.48,
       "VIS_DIFF_SEE": 0.55
     },
     "DIAB_DX_PREV": {
-      "CKD_SELF_REPORT": 0.71,
+      "CKD_SELF_REPORT": 0.7,
       "DIAB_DX_PREV": 1.0,
       "ESKD_INCIDENCE": 0.7,
       "VIS_DIFF_SEE": 0.69
