@@ -289,7 +289,8 @@ with tab_dq:
         c[1].metric("Pass", counts.get("pass", 0))
         c[2].metric("Warn", counts.get("warn", 0))
         c[3].metric("Fail / error", counts.get("fail", 0) + counts.get("error", 0))
-        st.caption(f"dbt {tr.get('dbt_version')} · run at {tr.get('generated_at', '')[:19]} UTC")
+        st.caption(f"dbt {tr.get('dbt_version')} · results recorded "
+                   f"{tr.get('generated_at', '')[:19]} UTC (updated only when results change)")
         tdf = pd.DataFrame(tr["tests"])
         status = st.multiselect("Status", sorted(tdf.status.unique()),
                                 default=sorted(tdf.status.unique()))

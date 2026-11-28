@@ -5,6 +5,7 @@ data/mart/ is committed so the Streamlit app and static site run fully offline.
 
 from __future__ import annotations
 
+import filecmp
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -32,6 +33,38 @@ CROSSWALKS = [
 ]
 
 
+VOLATILE_KEYS = ("generated_at", "exported_at")
+
+
+def replace_if_changed(tmp: Path, dest: Path) -> bool:
+    """Move tmp over dest only if the bytes differ, so unchanged data leaves no diff."""
+    if dest.exists() and filecmp.cmp(tmp, dest, shallow=False):
+        tmp.unlink()
+        return False
+    tmp.replace(dest)
+    return True
+
+
+def write_json_if_changed(dest: Path, obj: dict) -> bool:
+    """Write JSON unless only timestamp fields differ from the committed file.
+
+    Timestamps therefore record when the content last changed, not every rebuild.
+    """
+    if dest.exists():
+        try:
+            old = json.loads(dest.read_text())
+        except json.JSONDecodeError:
+            old = None
+        if isinstance(old, dict):
+            def strip(d: dict) -> dict:
+                return {k: v for k, v in d.items() if k not in VOLATILE_KEYS}
+
+            if strip(old) == strip(obj):
+                return False
+    dest.write_text(json.dumps(obj, indent=2) + "\n")
+    return True
+
+
 def export_tables(con: duckdb.DuckDBPyConnection) -> dict[str, int]:
     MART_DIR.mkdir(parents=True, exist_ok=True)
     counts = {}
@@ -47,10 +80,12 @@ def export_tables(con: duckdb.DuckDBPyConnection) -> dict[str, int]:
         # estimate_id is recomputed on read (analysis.common.mart_view_sql): it is a
         # hash of the grain and would otherwise be ~40% of the committed file.
         cols = "* exclude (estimate_id)" if name == "fct_indicator_estimates" else "*"
+        tmp = out.with_suffix(".parquet.tmp")
         con.execute(
-            f"copy (select {cols} from {t}{order}) to '{out}' "
+            f"copy (select {cols} from {t}{order}) to '{tmp}' "
             "(format parquet, compression zstd, compression_level 19)"
         )
+        replace_if_changed(tmp, out)
         counts[name] = con.execute(f"select count(*) from {t}").fetchone()[0]
     return counts
 
@@ -97,14 +132,14 @@ def main() -> None:
     counts = export_tables(con)
     summary = summarize_tests()
     if summary:
-        (MART_DIR / "dbt_test_results.json").write_text(json.dumps(summary, indent=2) + "\n")
+        write_json_if_changed(MART_DIR / "dbt_test_results.json", summary)
     snap = REPO_ROOT / "data" / "sample" / "_manifest.json"
     meta = {
         "exported_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "row_counts": counts,
         "raw_snapshot": json.loads(snap.read_text()) if snap.exists() else {},
     }
-    (MART_DIR / "_export_meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+    write_json_if_changed(MART_DIR / "_export_meta.json", meta)
     size = sum(p.stat().st_size for p in MART_DIR.glob("*.parquet"))
     print(f"exported {len(counts)} tables to {MART_DIR.relative_to(REPO_ROOT)} ({size/1e6:.2f} MB)")
 

@@ -133,3 +133,80 @@ def test_sources_registry_is_complete():
         assert s.url == f"https://data.cdc.gov/d/{s.dataset_id}"
         assert s.extra.get("access_date"), s.key
         assert s.publisher
+
+
+def _spec(key="demo"):
+    return DatasetSpec(
+        key=key, domain="x", name="n", dataset_id="abcd-1234", url="u", publisher="p"
+    )
+
+
+def test_skips_source_unchanged_since_committed_snapshot(tmp_path):
+    """A fresh checkout has an empty raw zone; the committed snapshot is the baseline."""
+    sample, raw = tmp_path / "sample", tmp_path / "raw"
+    session = FakeSession([{"a": "1"}])
+    assert ingest_spec(_spec(), make_client(session), root=sample) is not None
+    calls_before = len(session.calls)
+    out = ingest_spec(_spec(), make_client(session), root=raw, baseline=sample)
+    assert out is None
+    assert not (raw / "demo").exists()
+    # only metadata was requested, no row pages
+    assert all("/api/views/" in url for url, _ in session.calls[calls_before:])
+
+
+def test_repulls_when_upstream_version_changes(tmp_path, monkeypatch):
+    sample, raw = tmp_path / "sample", tmp_path / "raw"
+    session = FakeSession([{"a": "1"}])
+    ingest_spec(_spec(), make_client(session), root=sample)
+    orig_get = session.get
+
+    def newer_metadata(url, params=None, timeout=None):
+        resp = orig_get(url, params, timeout)
+        if "/api/views/" in url:
+            resp._payload = {**resp._payload, "rowsUpdatedAt": 456}
+        return resp
+
+    monkeypatch.setattr(session, "get", newer_metadata)
+    assert ingest_spec(_spec(), make_client(session), root=raw, baseline=sample) is not None
+
+
+def test_force_ignores_baseline(tmp_path):
+    sample, raw = tmp_path / "sample", tmp_path / "raw"
+    session = FakeSession([{"a": "1"}])
+    ingest_spec(_spec(), make_client(session), root=sample)
+    out = ingest_spec(_spec(), make_client(session), root=raw, baseline=sample, force=True)
+    assert out is not None
+
+
+def test_promote_is_a_noop_when_nothing_was_pulled(tmp_path, capsys):
+    from ingest.snapshot import promote
+
+    sample, raw = tmp_path / "sample", tmp_path / "raw"
+    for key in ("a", "b"):
+        storage.write_snapshot(key, [{"x": "1"}], dataset_id=f"id-{key}", where=None,
+                               rows_updated_at=1, root=sample)
+    before = {p: p.read_bytes() for p in sample.rglob("*") if p.is_file()}
+    promote(raw_root=raw, sample_root=sample)
+    after = {p: p.read_bytes() for p in sample.rglob("*") if p.is_file()}
+    assert before == after
+    assert "snapshot unchanged" in capsys.readouterr().out
+
+
+def test_promote_updates_only_changed_sources(tmp_path):
+    from datetime import timedelta
+
+    from ingest.snapshot import promote
+
+    sample, raw = tmp_path / "sample", tmp_path / "raw"
+    t0 = storage.utc_now()
+    for key in ("a", "b"):
+        storage.write_snapshot(key, [{"x": "1"}], dataset_id=f"id-{key}", where=None,
+                               rows_updated_at=1, root=sample, loaded_at=t0)
+    untouched = {p: p.read_bytes() for p in (sample / "b").rglob("*.parquet")}
+    storage.write_snapshot("a", [{"x": "2"}], dataset_id="id-a", where=None,
+                           rows_updated_at=2, root=raw, loaded_at=t0 + timedelta(days=7))
+    manifest = promote(raw_root=raw, sample_root=sample)
+    assert manifest["a"]["source_rows_updated_at"] == 2
+    assert manifest["b"]["source_rows_updated_at"] == 1
+    assert {p: p.read_bytes() for p in (sample / "b").rglob("*.parquet")} == untouched
+    assert len(list((sample / "a").glob("*.parquet"))) == 1

@@ -10,13 +10,15 @@ from __future__ import annotations
 from pathlib import Path
 
 from ingest.pipeline import run_domain
-from ingest.storage import RAW_DIR
+from ingest.storage import RAW_DIR, SAMPLE_DIR
 
 DOMAIN = "diabetes"
 
 
-def run(*, force: bool = False, root: Path = RAW_DIR) -> list[Path]:
-    return run_domain(DOMAIN, force=force, root=root)
+def run(
+    *, force: bool = False, root: Path = RAW_DIR, baseline: Path | None = SAMPLE_DIR
+) -> list[Path]:
+    return run_domain(DOMAIN, force=force, root=root, baseline=baseline)
 
 
 if __name__ == "__main__":
