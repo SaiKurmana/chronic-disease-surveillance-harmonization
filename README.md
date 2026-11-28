@@ -39,7 +39,7 @@ project builds the **adapters** (reviewed crosswalk tables) and a single **socke
   idempotent snapshots and a load manifest ([`ingest/`](ingest)).
 - **Harmonization as code + data.** dbt staging → intermediate → marts on DuckDB, with
   indicator, stratification, data-source and FIPS crosswalks as reviewed seeds ([`transform/`](transform)).
-- **Data quality gates.** 77 dbt tests: keys, accepted values, 0–100 bounds, CI brackets,
+- **Data quality gates.** <!--m:n_dbt_tests-->77<!--/m--> dbt tests: keys, accepted values, 0–100 bounds, CI brackets,
   composite referential integrity, a **custom unmapped-crosswalk test**, and a
   cross-source agreement check.
 - **Gap & overlap analysis.** Schema comparison matrix, coverage, CI and suppression
@@ -59,7 +59,7 @@ flowchart LR
   B -->|snapshot| C[("data/sample<br/>committed, offline")]
   C --> D["dbt + DuckDB<br/>staging → intermediate → marts"]
   S["seeds<br/>crosswalks · FIPS · registry"] --> D
-  D --> T{{"77 dbt tests"}}
+  D --> T{{"dbt tests"}}
   D --> M[("data/mart<br/>parquet")]
   M --> R["analysis/<br/>gap report · pilot"]
   M --> APP["Streamlit app"]
@@ -81,7 +81,7 @@ make setup        # create .venv and install pinned dependencies
 ```
 
 ```bash
-make test         # ruff + dbt build (models + 77 data tests) + pytest
+make test         # ruff + dbt build (models + data tests) + pytest
 ```
 
 ```bash
@@ -92,30 +92,30 @@ Other targets: `make ingest` (live pull from data.cdc.gov, then refresh the snap
 `make transform` (dbt build + export marts), `make analysis`, `make docs`, `make site`
 (builds `_site/`).
 
-## Key findings (pilot year 2022)
+## Key findings (pilot year <!--m:pilot_year-->2022<!--/m-->)
 
 _From [analysis/output/pilot_findings.md](analysis/output/pilot_findings.md) and the
 [gap report](analysis/output/gap_report.md). These are descriptive, state-level
 comparisons; see [limitations](docs/limitations.md)._
 
 - **Overlapping systems mostly agree, except for one year.** CDI and USDSS publish the
-  same BRFSS diabetes indicator: 88.8% of matched crude cells are within 0.5 percentage
-  points. In **2020**, 36.2% of cells differ by more than 0.5 pp, compared with 2.7–4.0% in
+  same BRFSS diabetes indicator: <!--m:dm_within_half_pct-->88.8<!--/m-->% of matched crude cells are within 0.5 percentage
+  points. In **2020**, <!--m:dm_2020_pct-->36.2<!--/m-->% of cells differ by more than 0.5 pp, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.0<!--/m-->% in
   other years. The cause is not determined from these data. CDC's BRFSS 2020
   comparability notes document disrupted 2020 data collection, which is possible context
   only ([limitations](docs/limitations.md#overlapping-sources-do-not-always-agree)).
   VEHSS and BRFSS Prevalence publish the same vision question and agree to within 0.5 pp
-  in 99.5% of cells.
+  in <!--m:vis_within_half_pct-->99.5<!--/m-->% of cells.
 - **State rankings move together.** Spearman ρ across 50 states + DC: diabetes ×
-  self-reported kidney disease 0.71, diabetes × vision difficulty 0.69, diabetes ×
-  treated ESKD incidence 0.70.
-- **Co-occurrence.** Six states are in the top third on all four pilot indicators:
-  AR, KY, LA, OK, TN, WV. Of the 13 states in the top third on three or more, 11 are in the South.
+  self-reported kidney disease <!--m:rho_dm_ckd-->0.71<!--/m-->, diabetes × vision difficulty <!--m:rho_dm_vis-->0.69<!--/m-->, diabetes ×
+  treated ESKD incidence <!--m:rho_dm_eskd-->0.70<!--/m-->.
+- **Co-occurrence.** <!--m:n_top_all_word_cap-->Six<!--/m--> states are in the top third on all <!--m:pilot_n_indicators-->4<!--/m--> pilot indicators:
+  <!--m:states_top_all-->AR, KY, LA, OK, TN, WV<!--/m-->. Of the <!--m:n_top_3plus-->13<!--/m--> states in the top third on three or more, <!--m:top3plus_region_count-->11<!--/m--> are in the <!--m:top3plus_region-->South<!--/m-->.
 - **Person-level signal published by VEHSS.** The median age-adjusted prevalence of
-  blindness or serious difficulty seeing is 10.4% among adults with diabetes, compared with 4.4%
+  blindness or serious difficulty seeing is <!--m:vis_dm_yes_pct-->10.4<!--/m-->% among adults with diabetes, compared with <!--m:vis_dm_no_pct-->4.4<!--/m-->%
   among adults without diabetes.
-- **Data-quality findings.** 18 VEHSS lower confidence limits are below 0% (floored and
-  flagged). 531 BRFSS values carry floating-point artifacts. Suppression rules and symbols
+- **Data-quality findings.** <!--m:n_floored_ci-->18<!--/m--> VEHSS lower confidence limits are below 0% (floored and
+  flagged). <!--m:n_float_artifacts-->531<!--/m--> BRFSS values carry floating-point artifacts. Suppression rules and symbols
   differ across all four systems.
 
 ## Screenshots
@@ -144,7 +144,7 @@ provenance panel under every view.
 ```
 sources.yml              source registry (single source of truth for provenance)
 ingest/                  Socrata client + one module per domain (diabetes, vision, kidney)
-data/sample/             committed snapshot of the real filtered pulls (< 1 MB)
+data/sample/             committed snapshot of the real filtered pulls (5 MB guard)
 data/mart/               exported, tested marts used by the app and site
 transform/               dbt project: staging, intermediate, marts, seeds, tests, macros
 analysis/                gap & overlap report, pilot, harmonization report, chart styles
@@ -157,7 +157,8 @@ docs/                    architecture, harmonization report, SOP, data dictionar
 ## Data sources
 
 All public, aggregate and de-identified. No PHI and no licensed or commercial data.
-Accessed 2026-11-05 through the Socrata API.
+Pulled <!--m:snapshot_dates-->2026-11-05<!--/m--> through the Socrata API (per-source pull times in
+[`data/sample/_manifest.json`](data/sample/_manifest.json)).
 
 1. Centers for Disease Control and Prevention. *USDSS State Burden/Magnitude Diabetes Indicators* (U.S. Diabetes Surveillance System). data.cdc.gov, dataset `b559-sbez`. <https://data.cdc.gov/d/b559-sbez>
 2. Centers for Disease Control and Prevention. *Behavioral Risk Factors – Vision and Eye Health Surveillance* (VEHSS). data.cdc.gov, dataset `vkwg-yswv`. Open Data Commons Attribution License. <https://data.cdc.gov/d/vkwg-yswv>

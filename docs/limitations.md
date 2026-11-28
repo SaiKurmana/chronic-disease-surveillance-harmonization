@@ -8,17 +8,17 @@ without going back to the original sources and their documentation.
 ## Reviewer quick reference
 
 Three handling decisions affect what the outputs show. Each is explained in full
-below. Counts are from the 2026-11-05 snapshot; the current counts are always in
+below. Counts are generated from the current snapshot (<!--m:snapshot_dates-->2026-11-05<!--/m-->); the full tables are in
 [`analysis/output/gap_report.md`](../analysis/output/gap_report.md) (sections 6 and 9).
 
-| Decision | What it means | Count (2026-11-05 snapshot) | Where to check |
+| Decision | What it means | Count (current snapshot) | Where to check |
 |---|---|---|---|
-| **Pilot uses crude rates** | The cross-condition pilot compares *crude* (not age-adjusted) prevalence, because self-reported kidney disease is published crude-only. ESKD incidence is the source's adjusted rate. Part of each state's position reflects its age structure. | 4 pilot indicators, 51 geographies, 2022 | `mart_pilot_state_profile`, [Crude vs age-adjusted](#methods-differ-across-sources) |
-| **VEHSS lower CIs floored at 0** | Some published VEHSS lower 95% limits are below 0%. `ci_low` is set to 0, `ci_low_floored_flag = true`, and the published value is kept in `ci_low_published`. | 18 rows | `fct_indicator_estimates.ci_low_floored_flag`, gap report §6 |
-| **Cross-classified rows dropped** | VEHSS cells with more than one stratifier (e.g. age × sex × race) are excluded, because the model keeps one stratifier per row. | 28,450 of 45,483 VEHSS rows | `int_vehss__estimates.n_strat_dims > 1`, gap report §9 |
+| **Pilot uses crude rates** | The cross-condition pilot compares *crude* (not age-adjusted) prevalence, because self-reported kidney disease is published crude-only. ESKD incidence is the source's adjusted rate. Part of each state's position reflects its age structure. | <!--m:pilot_n_indicators-->4<!--/m--> pilot indicators, <!--m:pilot_n_geos-->51<!--/m--> geographies, <!--m:pilot_year-->2022<!--/m--> | `mart_pilot_state_profile`, [Crude vs age-adjusted](#methods-differ-across-sources) |
+| **VEHSS lower CIs floored at 0** | Some published VEHSS lower 95% limits are below 0%. `ci_low` is set to 0, `ci_low_floored_flag = true`, and the published value is kept in `ci_low_published`. | <!--m:n_floored_ci-->18<!--/m--> rows | `fct_indicator_estimates.ci_low_floored_flag`, gap report §6 |
+| **Cross-classified rows dropped** | VEHSS cells with more than one stratifier (e.g. age × sex × race) are excluded, because the model keeps one stratifier per row. | <!--m:n_vehss_dropped-->28,450<!--/m--> of <!--m:n_vehss_raw-->45,483<!--/m--> VEHSS rows | `int_vehss__estimates.n_strat_dims > 1`, gap report §9 |
 
-Also excluded by design: BRFSS "median of states" rows (56; not population
-estimates) and CDI ESKD counts (208; the mart holds rates only).
+Also excluded by design: BRFSS "median of states" rows (<!--m:n_brfss_median_rows-->56<!--/m-->; not population
+estimates) and CDI ESKD counts (<!--m:n_cdi_count_rows-->208<!--/m-->; the mart holds rates only).
 
 ## Data are survey and registry estimates, not counts of people
 
@@ -63,8 +63,8 @@ estimates) and CDI ESKD counts (208; the mart holds rates only).
   forcing them together.
 * **Cross-classified rows dropped.** VEHSS publishes cells that combine stratifiers
   (for example age × sex, or age × sex × race). The harmonized model keeps one
-  stratifier per row, so the 28,450 VEHSS rows with more than one non-total
-  stratifier (of 45,483 pulled) are not in the mart. They remain in the raw snapshot.
+  stratifier per row, so the <!--m:n_vehss_dropped-->28,450<!--/m--> VEHSS rows with more than one non-total
+  stratifier (of <!--m:n_vehss_raw-->45,483<!--/m--> pulled) are not in the mart. They remain in the raw snapshot.
   Vision difficulty for, say, women aged 65+ is therefore not available in the
   harmonized model, even though VEHSS publishes it.
 
@@ -72,8 +72,8 @@ estimates) and CDI ESKD counts (208; the mart holds rates only).
 
 Where two systems publish the same BRFSS-based indicator, estimates are very close
 in most years. The gap report shows one exception. For diagnosed diabetes in
-**2020**, 36.2% of cells matched between CDI and USDSS differ by more than 0.5
-percentage points, compared with 2.7–4.0% in 2019 and 2021–2023.
+**2020**, <!--m:dm_2020_pct-->36.2<!--/m-->% of cells matched between CDI and USDSS differ by more than 0.5
+percentage points, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.0<!--/m-->% in <!--m:dm_other_years-->2019 and 2021–2023<!--/m-->.
 
 **The cause is not determined from these data.** Neither dataset documents why its
 2020 values differ from the other's.
@@ -98,8 +98,8 @@ Rankings and medians are computed only over reported values.
 
 ## Confidence intervals
 
-* Intervals are used **as published**, with one adjustment. **18 VEHSS lower limits
-  are below 0%** (snapshot of 2026-11-05). These intervals are symmetric around the
+* Intervals are used **as published**, with one adjustment. **<!--m:n_floored_ci-->18<!--/m--> VEHSS lower limits
+  are below 0%** (current snapshot). These intervals are symmetric around the
   estimate, which can cross zero for rare outcomes in small groups (most are
   race/ethnicity strata). For these rows the harmonized `ci_low` is floored at 0,
   `ci_low_floored_flag` is true, and `ci_low_published` keeps the original value.
