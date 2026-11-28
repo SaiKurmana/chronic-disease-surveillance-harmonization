@@ -340,8 +340,9 @@ def data_quality_page() -> None:
     body = f"""
 <article class="prose wide">
 <h1>Data quality</h1>
-<p>Results of the last <code>dbt build</code> (dbt {tr['dbt_version']}, run
-{tr['generated_at'][:19].replace('T', ' ')} UTC). The build runs every model and test in
+<p>Results of <code>dbt build</code> (dbt {tr['dbt_version']}), recorded
+{tr['generated_at'][:19].replace('T', ' ')} UTC. The file is rewritten only when results
+change, so this is when they last changed. The build runs every model and test in
 dependency order; an error-severity failure stops the models downstream of it.</p>
 <div class="grid cols-4">
   <div class="card tile"><div class="label">Tests</div><div class="value">{sum(tc.values())}</div></div>
