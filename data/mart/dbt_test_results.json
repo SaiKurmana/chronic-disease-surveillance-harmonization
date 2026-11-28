@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T21:10:35.920657Z",
+  "generated_at": "2026-11-28T02:23:49.459580Z",
   "dbt_version": "1.10.13",
   "status_counts": {
     "pass": 76,
@@ -12,9 +12,9 @@
       "model": "",
       "column": "",
       "status": "warn",
-      "failures": 179,
+      "failures": 187,
       "severity": "warn",
-      "message": "Got 179 results, configured to warn if != 0"
+      "message": "Got 187 results, configured to warn if != 0"
     },
     {
       "name": "not_null_dim_geography_geo_fips",

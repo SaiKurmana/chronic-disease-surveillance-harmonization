@@ -19,12 +19,12 @@
   },
   "usdss_state": {
     "dataset_id": "b559-sbez",
-    "file": "usdss_state/usdss_state__20261105T042350Z.parquet",
+    "file": "usdss_state/usdss_state__20261128T022337Z.parquet",
     "filter": "indicator in ('Diagnosed Diabetes','Newly Diagnosed Diabetes') AND unit in ('Percentage','Rate per 1,000')",
     "filter_hash": "814df961e79b",
-    "loaded_at": "2026-11-05T04:23:50+00:00",
-    "rows": 63450,
-    "source_rows_updated_at": 1782228990
+    "loaded_at": "2026-11-28T02:23:37+00:00",
+    "rows": 65988,
+    "source_rows_updated_at": 1794951500
   },
   "vehss_brfss": {
     "dataset_id": "vkwg-yswv",
