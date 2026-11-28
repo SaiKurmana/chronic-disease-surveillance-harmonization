@@ -42,12 +42,12 @@ analysis can plug into. The adapters live in reviewed CSV files, not inside code
 
 | Pair | Matched cells (both reported) | Mean abs. difference | Within 0.5 pp | CIs overlap |
 |---|---|---|---|---|
-| Diagnosed diabetes, CDI vs USDSS (crude) | 1,948 | 0.2 pp | 88.8% | 99.7% |
+| Diagnosed diabetes, CDI vs USDSS (crude) | 1,948 | 0.22 pp | 88.3% | 99.7% |
 | Vision difficulty, BRFSS Prevalence vs VEHSS (crude) | 3,158 | 0.05 pp | 99.5% | 100.0% |
 
-The diabetes disagreement is concentrated in **2020**: 36.2% of
+The diabetes disagreement is concentrated in **2020**: 37.9% of
 matched cells differ by more than 0.5 pp (mean absolute difference
-0.68 pp), compared with 2.7–4.0% in
+0.68 pp), compared with 2.7–4.3% in
 other years. **The cause is not determined from these data**; neither dataset
 documents why its 2020 values differ from the other's. As possible context only,
 CDC's *Comparability of Data, BRFSS 2020* documents that 2020 data collection was
@@ -79,7 +79,7 @@ it in another.
   appears only in BRFSS Prevalence; diabetes/hypertension/smoking status only in VEHSS.
 * **Suppression burden:** 28.3% of BRFSS Prevalence
   kidney/vision rows and 26.0% of CDI diabetes/ESKD rows are suppressed,
-  versus 9.7% for USDSS. This is mostly small strata.
+  versus 6.3% for USDSS. This is mostly small strata.
 * **Kidney:** no state-level CKD prevalence based on laboratory data is published on
   data.cdc.gov. The dedicated CKD Surveillance System site was unavailable during
   the build.
@@ -94,7 +94,7 @@ it in another.
 | Blind or serious difficulty seeing | vehss_brfss | crude_prevalence | % | 5.2 | UT 3.5 | MS 10.5 | 16 of 17 |
 
 State rankings move together. Spearman ρ between diagnosed diabetes and
-self-reported kidney disease is 0.71, between diabetes and
+self-reported kidney disease is 0.70, between diabetes and
 vision difficulty 0.69, and between diabetes and treated ESKD
 incidence 0.70.
 

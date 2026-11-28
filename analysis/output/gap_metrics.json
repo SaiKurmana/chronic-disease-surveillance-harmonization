@@ -3,11 +3,11 @@
     {
       "Source": "USDSS (b559-sbez)",
       "Domain": "diabetes",
-      "Raw rows (filtered pull)": 63450,
-      "Harmonized rows": 63450,
+      "Raw rows (filtered pull)": 65988,
+      "Harmonized rows": 65988,
       "Indicators": 2,
-      "Years": "2000-2024",
-      "Pulled (UTC)": "2026-11-05"
+      "Years": "2000-2025",
+      "Pulled (UTC)": "2026-11-28"
     },
     {
       "Source": "VEHSS BRFSS (vkwg-yswv)",
@@ -64,8 +64,8 @@
       "Indicator": "DIAB_DX_PREV",
       "Source": "usdss_state",
       "Measure types": "age_adjusted_prevalence, crude_prevalence",
-      "Years": "2000-2024",
-      "N years": 25,
+      "Years": "2000-2025",
+      "N years": 26,
       "States+DC": 51,
       "Territories": 3,
       "National row": "no",
@@ -75,8 +75,8 @@
       "Indicator": "DIAB_NEW_INC",
       "Source": "usdss_state",
       "Measure types": "age_adjusted_rate, crude_rate",
-      "Years": "2000-2024",
-      "N years": 25,
+      "Years": "2000-2025",
+      "N years": 26,
       "States+DC": 51,
       "Territories": 3,
       "National row": "no",
@@ -144,7 +144,7 @@
     {
       "Source": "usdss_state",
       "Unit": "per_1000",
-      "% with CI": 100.0,
+      "% with CI": 96.6,
       "% with SE": 100.0,
       "Negative lower CI (floored)": 0.0,
       "Median CI width (pp)": NaN
@@ -155,7 +155,7 @@
       "% with CI": 100.0,
       "% with SE": 100.0,
       "Negative lower CI (floored)": 0.0,
-      "Median CI width (pp)": 2.8
+      "Median CI width (pp)": 2.87
     },
     {
       "Source": "vehss_brfss",
@@ -181,9 +181,9 @@
     },
     {
       "Source": "usdss_state",
-      "Typical decimals": 1,
-      "Values with float artifacts (>4 dp)": 0,
-      "Example artifact length": null
+      "Typical decimals": 6,
+      "Values with float artifacts (>4 dp)": 52500,
+      "Example artifact length": 6
     },
     {
       "Source": "vehss_brfss",
@@ -209,8 +209,8 @@
     },
     {
       "Source": "usdss_state",
-      "Rows": 63450,
-      "% suppressed": 9.7,
+      "Rows": 65988,
+      "% suppressed": 6.3,
       "% not available": 6.9,
       "Footnotes used for non-reported cells": "No Data \u2016 Suppressed"
     },
@@ -232,7 +232,7 @@
       "Both reported": 1439,
       "Mean diff (B-A, pp)": -0.11,
       "Mean abs diff (pp)": 0.2,
-      "% within 0.5 pp": 92.1,
+      "% within 0.5 pp": 91.5,
       "Pearson r": 0.993,
       "% CIs overlap": 100.0,
       "Suppression disagreements": 29
@@ -245,8 +245,8 @@
       "Matched cells": 2160,
       "Both reported": 1948,
       "Mean diff (B-A, pp)": -0.03,
-      "Mean abs diff (pp)": 0.2,
-      "% within 0.5 pp": 88.8,
+      "Mean abs diff (pp)": 0.22,
+      "% within 0.5 pp": 88.3,
       "Pearson r": 0.987,
       "% CIs overlap": 99.7,
       "Suppression disagreements": 20
@@ -272,7 +272,7 @@
       "Pair": "cdi vs usdss_state",
       "Year": "2019",
       "Both reported": 661,
-      "Mean abs diff (pp)": 0.07,
+      "Mean abs diff (pp)": 0.09,
       "% differing > 0.5 pp": 2.7
     },
     {
@@ -281,31 +281,31 @@
       "Year": "2020",
       "Both reported": 672,
       "Mean abs diff (pp)": 0.68,
-      "% differing > 0.5 pp": 36.2
+      "% differing > 0.5 pp": 37.9
     },
     {
       "Indicator": "DIAB_DX_PREV",
       "Pair": "cdi vs usdss_state",
       "Year": "2021",
       "Both reported": 678,
-      "Mean abs diff (pp)": 0.09,
-      "% differing > 0.5 pp": 3.1
+      "Mean abs diff (pp)": 0.1,
+      "% differing > 0.5 pp": 3.2
     },
     {
       "Indicator": "DIAB_DX_PREV",
       "Pair": "cdi vs usdss_state",
       "Year": "2022",
       "Both reported": 701,
-      "Mean abs diff (pp)": 0.08,
-      "% differing > 0.5 pp": 3.3
+      "Mean abs diff (pp)": 0.1,
+      "% differing > 0.5 pp": 3.7
     },
     {
       "Indicator": "DIAB_DX_PREV",
       "Pair": "cdi vs usdss_state",
       "Year": "2023",
       "Both reported": 675,
-      "Mean abs diff (pp)": 0.1,
-      "% differing > 0.5 pp": 4.0
+      "Mean abs diff (pp)": 0.11,
+      "% differing > 0.5 pp": 4.3
     },
     {
       "Indicator": "VIS_DIFF_SEE",

@@ -8,7 +8,7 @@ without going back to the original sources and their documentation.
 ## Reviewer quick reference
 
 Three handling decisions affect what the outputs show. Each is explained in full
-below. Counts are generated from the current snapshot (<!--m:snapshot_dates-->2026-11-05<!--/m-->); the full tables are in
+below. Counts are generated from the current snapshot (<!--m:snapshot_dates-->2026-11-05 to 2026-11-28<!--/m-->); the full tables are in
 [`analysis/output/gap_report.md`](../analysis/output/gap_report.md) (sections 6 and 9).
 
 | Decision | What it means | Count (current snapshot) | Where to check |
@@ -72,8 +72,8 @@ estimates) and CDI ESKD counts (<!--m:n_cdi_count_rows-->208<!--/m-->; the mart 
 
 Where two systems publish the same BRFSS-based indicator, estimates are very close
 in most years. The gap report shows one exception. For diagnosed diabetes in
-**2020**, <!--m:dm_2020_pct-->36.2<!--/m-->% of cells matched between CDI and USDSS differ by more than 0.5
-percentage points, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.0<!--/m-->% in <!--m:dm_other_years-->2019 and 2021–2023<!--/m-->.
+**2020**, <!--m:dm_2020_pct-->37.9<!--/m-->% of cells matched between CDI and USDSS differ by more than 0.5
+percentage points, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.3<!--/m-->% in <!--m:dm_other_years-->2019 and 2021–2023<!--/m-->.
 
 **The cause is not determined from these data.** Neither dataset documents why its
 2020 values differ from the other's.

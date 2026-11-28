@@ -99,15 +99,15 @@ _From [analysis/output/pilot_findings.md](analysis/output/pilot_findings.md) and
 comparisons; see [limitations](docs/limitations.md)._
 
 - **Overlapping systems mostly agree, except for one year.** CDI and USDSS publish the
-  same BRFSS diabetes indicator: <!--m:dm_within_half_pct-->88.8<!--/m-->% of matched crude cells are within 0.5 percentage
-  points. In **2020**, <!--m:dm_2020_pct-->36.2<!--/m-->% of cells differ by more than 0.5 pp, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.0<!--/m-->% in
+  same BRFSS diabetes indicator: <!--m:dm_within_half_pct-->88.3<!--/m-->% of matched crude cells are within 0.5 percentage
+  points. In **2020**, <!--m:dm_2020_pct-->37.9<!--/m-->% of cells differ by more than 0.5 pp, compared with <!--m:dm_other_years_min_pct-->2.7<!--/m-->–<!--m:dm_other_years_max_pct-->4.3<!--/m-->% in
   other years. The cause is not determined from these data. CDC's BRFSS 2020
   comparability notes document disrupted 2020 data collection, which is possible context
   only ([limitations](docs/limitations.md#overlapping-sources-do-not-always-agree)).
   VEHSS and BRFSS Prevalence publish the same vision question and agree to within 0.5 pp
   in <!--m:vis_within_half_pct-->99.5<!--/m-->% of cells.
 - **State rankings move together.** Spearman ρ across 50 states + DC: diabetes ×
-  self-reported kidney disease <!--m:rho_dm_ckd-->0.71<!--/m-->, diabetes × vision difficulty <!--m:rho_dm_vis-->0.69<!--/m-->, diabetes ×
+  self-reported kidney disease <!--m:rho_dm_ckd-->0.70<!--/m-->, diabetes × vision difficulty <!--m:rho_dm_vis-->0.69<!--/m-->, diabetes ×
   treated ESKD incidence <!--m:rho_dm_eskd-->0.70<!--/m-->.
 - **Co-occurrence.** <!--m:n_top_all_word_cap-->Six<!--/m--> states are in the top third on all <!--m:pilot_n_indicators-->4<!--/m--> pilot indicators:
   <!--m:states_top_all-->AR, KY, LA, OK, TN, WV<!--/m-->. Of the <!--m:n_top_3plus-->13<!--/m--> states in the top third on three or more, <!--m:top3plus_region_count-->11<!--/m--> are in the <!--m:top3plus_region-->South<!--/m-->.
@@ -157,7 +157,7 @@ docs/                    architecture, harmonization report, SOP, data dictionar
 ## Data sources
 
 All public, aggregate and de-identified. No PHI and no licensed or commercial data.
-Pulled <!--m:snapshot_dates-->2026-11-05<!--/m--> through the Socrata API (per-source pull times in
+Pulled <!--m:snapshot_dates-->2026-11-05 to 2026-11-28<!--/m--> through the Socrata API (per-source pull times in
 [`data/sample/_manifest.json`](data/sample/_manifest.json)).
 
 1. Centers for Disease Control and Prevention. *USDSS State Burden/Magnitude Diabetes Indicators* (U.S. Diabetes Surveillance System). data.cdc.gov, dataset `b559-sbez`. <https://data.cdc.gov/d/b559-sbez>
