@@ -86,7 +86,6 @@ def compute() -> dict[str, str]:
     }
 
     dates = sorted({v["loaded_at"][:10] for v in snap.values()})
-    sample_bytes = sum(p.stat().st_size for p in (ROOT / "data" / "sample").rglob("*.parquet"))
 
     return {
         # dbt
@@ -121,7 +120,6 @@ def compute() -> dict[str, str]:
         "n_cdi_count_rows": f"{dropped['CDI']:,}",
         # snapshot
         "snapshot_dates": dates[0] if len(dates) == 1 else f"{dates[0]} to {dates[-1]}",
-        "sample_mb": f"{sample_bytes / 1e6:.1f}",
     }
 
 
