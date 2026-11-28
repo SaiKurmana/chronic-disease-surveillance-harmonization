@@ -48,6 +48,7 @@ analysis: transform ## gap & overlap report + pilot findings
 	$(BIN)/python -m analysis.gap_report
 	$(BIN)/python -m analysis.pilot
 	$(BIN)/python -m analysis.harmonization_report
+	$(BIN)/python -m analysis.doc_metrics
 
 docs: setup ## dbt docs + generated data dictionary
 	$(DBT) docs generate $(DBT_ARGS)
